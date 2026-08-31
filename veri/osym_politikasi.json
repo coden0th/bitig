@@ -1,0 +1,47 @@
+{
+  "surum": "1.0.0",
+  "aciklama": [
+    "ÖSYM'nin ses olaylarına bakışı ile dilbilimsel çözümlemenin ayrıldığı yerler.",
+    "",
+    "Motor bu dosyayı BİLMEZ. Saf dilbilimsel çıktısını üretir, politika katmanı",
+    "onun üzerine uygulanır (CLAUDE.md §1.4). Bu ayrımın sebebi şu: motor 'çevre'yi",
+    "kök olarak bilir ve haklıdır — 'çevre' bugün Türkçe'nin bir sözcüğüdür. ÖSYM",
+    "ise sözcüğün tarihine bakar (çevir + e) ve orada bir ünlü düşmesi görür. İkisi",
+    "de kendi çerçevesinde doğrudur; biri diğerini bastırmamalı.",
+    "",
+    "Bu yüzden çıktı HER İKİ GÖRÜŞÜ birden taşır. `mod` yalnızca hangisinin",
+    "geçerli sayılacağını belirler; diğeri kaybolmaz, kullanıcıya gösterilir.",
+    "",
+    "Buraya bir kayıt eklemek için ÇIKMIŞ BİR SORU gerekir. 'Bence ÖSYM böyle",
+    "düşünür' yeterli değil — `kaynak` alanı zorunludur. Ölçüsüz eklenen kural,",
+    "v1'in motor içine gömülmüş ÖSYM notlarına geri dönüştür."
+  ],
+
+  "sozluklesmis_turetim": [
+    {
+      "kok": "çevre",
+      "olay": "SES.UD.01",
+      "coz": "çevir + -e",
+      "dusen": "i",
+      "gerekce": "ÖSYM 'çevre' sözcüğünü canlı bir ünlü düşmesi örneği sayar. Dilbilimsel olarak sözcükleşmiştir: 'çevre' bugün bağımsız bir köktür ve türetim çalışma anında gerçekleşmez.",
+      "kaynak": "OGM Materyal (EBA) ses bilgisi testi, soru 5: 'I numaralı sözcük olan çevre'de i sesi düştüğü için ünlü düşmesi vardır.' — ayrıca aynı testin 12. sorusunda 'çevresi' seçeneği"
+    },
+    {
+      "kok": "oyna",
+      "olay": "SES.UD.01",
+      "coz": "oyun + -a",
+      "dusen": "u",
+      "gerekce": "'oyna-' fiili 'oyun' isminden türemiştir ve türerken orta hecenin dar ünlüsü düşmüştür. Sözlükte bugün bağımsız bir fiil kökü olarak durur; ÖSYM ise türetimi canlı sayar. 'çevre' ile aynı sınıf.",
+      "kaynak": "OGM Materyal (EBA) ses bilgisi testi, soru 12, B seçeneği: 'çocukları kaldırımda oynamaları konusunda uyardı' — doğru cevap D olduğuna göre B'de ünlü düşmesi sayılmıştır"
+    },
+    {
+      "kok": "diye",
+      "olay": "SES.DAR.01",
+      "coz": "de- + -e (kaynaştırma y ile: de-y-e)",
+      "gerekce": "'diye' sözlükte türetimsiz, çekimsiz bir bağlaç (Postp) olarak durur; motor 'de-' fiiline giden bir türetim izi görmez, dolayısıyla daralma üretmez. ÖSYM ise bunu 'demek' fiilinin -e ulaç ekiyle çekimlenmiş biçimi sayar ve kuralın kendi tanımındaki (kural_haritasi SES.DAR.01) 'de- + -yor → diyor' örneğiyle aynı sınıfa koyar. 'çevre'/'oyna' ile aynı desen: sözlükleşmiş türetim.",
+      "kaynak": "OGM Materyal (EBA) TYT Türkçe, Ses Bilgisi, 3. Test soru 10, s.52: 'Aşağıdaki dizelerin hangisinde ünlü daralması yoktur?' A seçeneği 'Dost haber yollamış tez gelsin diye...' — doğru cevap D olduğuna göre A'da (diye) daralma sayılmıştır"
+    }
+  ],
+
+  "saymaz": []
+}

@@ -1,0 +1,146 @@
+{
+  "surum": "1.0.0",
+  "aciklama": [
+    "Kanonik ses olayı kural haritası. Motorun ürettiği her olay buradaki bir",
+    "kural_id'ye bağlanır; açıklamalı çözümdeki kaynak gösterimi de buradan çıkar.",
+    "",
+    "'tetikleyen' alanı kuralı ateşleyen KÖK ÖZNİTELİĞİdir, yüzeydeki harf dizisi",
+    "değil. v1'in yanlış pozitiflerinin tamamı bu ayrımın yokluğundan doğuyordu.",
+    "",
+    "'karsi_ornekler' zorunludur: bir kural, onu tetiklememesi gereken örneğiyle",
+    "birlikte tanımlanır. Altın kümedeki negatif vakalar buradan türetilir.",
+    "",
+    "'meb_kodu' MEB Bağlam Temelli Soru Yazım Kılavuzu'ndaki süreç bileşeni kodu",
+    "içindir; kılavuz eşlemesi yapılana kadar boş bırakılır."
+  ],
+  "kurallar": {
+    "SES.YUM.01": {
+      "ad": "Ünsüz Yumuşaması",
+      "tanim": "Ötümsüz süreksiz ünsüzle (p, ç, t, k) biten çok heceli sözcüğe ünlüyle başlayan bir ek geldiğinde son ses ötümlüleşir: p→b, ç→c, t→d, k→ğ.",
+      "tetikleyen": "Voicing",
+      "engelleyen": ["NoVoicing", "InverseHarmony"],
+      "ornekler": [
+        {"govde": "kitap", "ek": "-ı", "yuzey": "kitabı", "degisim": "p→b"},
+        {"govde": "ağaç", "ek": "-ı", "yuzey": "ağacı", "degisim": "ç→c"},
+        {"govde": "kanat", "ek": "-ı", "yuzey": "kanadı", "degisim": "t→d"},
+        {"govde": "çocuk", "ek": "-u", "yuzey": "çocuğu", "degisim": "k→ğ"},
+        {"govde": "renk", "ek": "-i", "yuzey": "rengi", "degisim": "k→g (nk istisnası)"}
+      ],
+      "karsi_ornekler": [
+        {"yuzey": "güdük", "gerekce": "ek almamış; kelime kökün kendisi"},
+        {"yuzey": "sepeti", "gerekce": "NoVoicing — yumuşama sözlükte yasaklı"},
+        {"yuzey": "diyeti", "gerekce": "NoVoicing"},
+        {"yuzey": "niyeti", "gerekce": "NoVoicing"},
+        {"yuzey": "saati", "gerekce": "NoVoicing + InverseHarmony"},
+        {"yuzey": "topu", "gerekce": "tek heceli, yumuşamaz"},
+        {"yuzey": "kitapta", "gerekce": "ek ünsüzle başlıyor, koşul oluşmadı"}
+      ],
+      "meb_kodu": ""
+    },
+    "SES.UD.01": {
+      "ad": "Ünlü Düşmesi",
+      "tanim": "İki heceli bazı sözcüklere ünlüyle başlayan ek geldiğinde ikinci hecedeki dar ünlü düşer.",
+      "tetikleyen": "LastVowelDrop",
+      "engelleyen": [],
+      "ornekler": [
+        {"govde": "burun", "ek": "-u", "yuzey": "burnu", "degisim": "burun→burn"},
+        {"govde": "ağız", "ek": "-a", "yuzey": "ağza", "degisim": "ağız→ağz"},
+        {"govde": "gönül", "ek": "-ü", "yuzey": "gönlü", "degisim": "gönül→gönl"},
+        {"govde": "hapis", "ek": "-i", "yuzey": "hapsi", "degisim": "hapis→haps"}
+      ],
+      "karsi_ornekler": [
+        {"yuzey": "burun", "gerekce": "ek almamış"},
+        {"yuzey": "burunlar", "gerekce": "ek ünsüzle başlıyor, ünlü düşmez"},
+        {"yuzey": "kitabı", "gerekce": "LastVowelDrop özniteliği yok"}
+      ],
+      "meb_kodu": ""
+    },
+    "SES.UT.01": {
+      "ad": "Ünsüz Türemesi (İkizleşme)",
+      "tanim": "Aslı çift ünsüzlü olan alıntı sözcüklere ünlüyle başlayan ek geldiğinde son ünsüz ikizleşir.",
+      "tetikleyen": "Doubling",
+      "engelleyen": [],
+      "ornekler": [
+        {"govde": "hak", "ek": "-ı", "yuzey": "hakkı", "degisim": "k→kk"},
+        {"govde": "af", "ek": "-ı", "yuzey": "affı", "degisim": "f→ff"},
+        {"govde": "his", "ek": "-i", "yuzey": "hissi", "degisim": "s→ss"},
+        {"govde": "sır", "ek": "-ı", "yuzey": "sırrı", "degisim": "r→rr"}
+      ],
+      "karsi_ornekler": [
+        {"yuzey": "hak", "gerekce": "ek almamış"},
+        {"yuzey": "haklar", "gerekce": "ek ünsüzle başlıyor"},
+        {"yuzey": "kitabı", "gerekce": "Doubling özniteliği yok"}
+      ],
+      "meb_kodu": ""
+    },
+    "SES.KAY.01": {
+      "ad": "Kaynaştırma Ünsüzü",
+      "tanim": "İki ünlünün yan yana gelmesini önlemek için araya y, n, s veya ş girer. ÖSYM bunu ünsüz türemesi saymaz — ayrı bir olaydır.",
+      "tetikleyen": "yapisal",
+      "engelleyen": [],
+      "ornekler": [
+        {"govde": "kapı", "ek": "-ı", "yuzey": "kapısı", "degisim": "s kaynaştırması"},
+        {"govde": "masa", "ek": "-a", "yuzey": "masaya", "degisim": "y kaynaştırması"},
+        {"govde": "kapısı", "ek": "-ı", "yuzey": "kapısını", "degisim": "n kaynaştırması"}
+      ],
+      "karsi_ornekler": [
+        {"yuzey": "evi", "gerekce": "gövde ünsüzle bitiyor, kaynaştırmaya gerek yok"},
+        {"yuzey": "affı", "gerekce": "ikizleşme var, kaynaştırma değil"}
+      ],
+      "meb_kodu": ""
+    },
+    "SES.BEN.01": {
+      "ad": "Ünsüz Benzeşmesi (Sertleşme)",
+      "tanim": "Ötümsüz ünsüzle biten sözcüğe c, d, g ile başlayan bir ek geldiğinde ekin ilk sesi sertleşir: c→ç, d→t, g→k.",
+      "tetikleyen": "yapisal",
+      "engelleyen": [],
+      "ornekler": [
+        {"govde": "kitap", "ek": "-da", "yuzey": "kitapta", "degisim": "d→t"},
+        {"govde": "ağaç", "ek": "-dan", "yuzey": "ağaçtan", "degisim": "d→t"},
+        {"govde": "simit", "ek": "-ci", "yuzey": "simitçi", "degisim": "c→ç"}
+      ],
+      "karsi_ornekler": [
+        {"yuzey": "evde", "gerekce": "gövde ötümlü ünsüzle bitiyor"},
+        {"yuzey": "masada", "gerekce": "gövde ünlüyle bitiyor"}
+      ],
+      "meb_kodu": ""
+    },
+    "SES.DAR.01": {
+      "ad": "Ünlü Daralması",
+      "tanim": "a, e ile biten fiil köklerine -yor eki geldiğinde geniş ünlü daralır: a→ı, e→i. de- ve ye- fiillerinde ayrıca -ecek, -en gibi eklerde de görülür.",
+      "tetikleyen": "ProgressiveVowelDrop",
+      "engelleyen": [],
+      "dilim": 2,
+      "ornekler": [
+        {"govde": "başla", "ek": "-yor", "yuzey": "başlıyor", "degisim": "a→ı"},
+        {"govde": "de", "ek": "-yor", "yuzey": "diyor", "degisim": "e→i"},
+        {"govde": "ye", "ek": "-ecek", "yuzey": "yiyecek", "degisim": "e→i"}
+      ],
+      "karsi_ornekler": [
+        {"yuzey": "hediye", "gerekce": "isim; ProgressiveVowelDrop özniteliği yok"},
+        {"yuzey": "diyet", "gerekce": "isim, 'diye' altdizisi tesadüf"},
+        {"yuzey": "niyet", "gerekce": "isim"},
+        {"yuzey": "sandalye", "gerekce": "isim"}
+      ],
+      "meb_kodu": ""
+    },
+    "SES.UND.01": {
+      "ad": "Ünsüz Düşmesi",
+      "tanim": "Bazı 'k' ile biten sözcüklere küçültme eki (-CIk) geldiğinde kökün sonundaki 'k' tamamen düşer.",
+      "tetikleyen": "SonUnsuzDuser",
+      "engelleyen": [],
+      "ornekler": [
+        {"govde": "ufak", "ek": "-cık", "yuzey": "ufacık", "degisim": "k düşer"},
+        {"govde": "küçük", "ek": "-cük", "yuzey": "küçücük", "degisim": "k düşer"},
+        {"govde": "büyük", "ek": "-cek", "yuzey": "büyücek", "degisim": "k düşer"},
+        {"govde": "alçak", "ek": "-cık", "yuzey": "alçacık", "degisim": "k düşer"}
+      ],
+      "karsi_ornekler": [
+        {"yuzey": "yavrucak", "gerekce": "'yavru' zaten ünlüyle bitiyor, düşecek ünsüz yok — ÖSYM'nin çıkmış sorusunda tam olarak bu yüzden 'düşme örneği gösterilemez' seçeneği"},
+        {"yuzey": "ufaktan", "gerekce": "ek (-tan) küçültme eki değil, 'dusurur_unsuz' bayrağı yalnızca -CIk'te var"},
+        {"yuzey": "kitapçık", "gerekce": "'kitap' SonUnsuzDuser taşımıyor — yalnızca çıkmış soruyla doğrulanan 4 kök (ufak/küçük/büyük/alçak) işaretli, genel bir kural değil"}
+      ],
+      "meb_kodu": ""
+    }
+  }
+}

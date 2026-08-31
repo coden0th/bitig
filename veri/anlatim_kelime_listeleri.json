@@ -1,0 +1,46 @@
+{
+  "surum": "1.0.0",
+  "aciklama": [
+    "Anlatım bozukluğunun kelime-listesi/eş-oluşum ile (modelsiz) tespit edilebilen",
+    "alt türleri için veri. Her giriş bir gerçek ÖSYM/MEB sorusuyla doğrulanmıştır —",
+    "'gerekce' alanı kaynağı taşır (CLAUDE.md §10: 'ölçülmeyen kural eklenmez').",
+    "",
+    "Bu dosya `anlatim.py` tarafından okunur. Motorun (bitig/) parçası değildir:",
+    "burada tespit edilen olaylar morfolojik değil sözcük-eş-oluşumu tabanlıdır.",
+    "",
+    "Listeler BİLİNÇLİ OLARAK DAR tutulur. Genel bir eşanlamlılar sözlüğü değildir —",
+    "yalnızca gerçek bir soruda 'bu ikisi birlikte kullanılınca anlatım bozukluğu'",
+    "olduğu doğrulanmış çiftler/kategoriler durur. Yeni bir kayıt eklemek için",
+    "çıkmış bir soru gerekir (veri/tyt_override.json ile aynı disiplin)."
+  ],
+  "celisen_kategoriler": {
+    "aciklama": "Bu iki kategoriden birer sözcük aynı cümlede geçerse 'çelişen sözcüklerin bir arada kullanılması' türü anlatım bozukluğudur — biri KESİNLİK biri BELİRSİZLİK bildirir, ikisi aynı yargı için birlikte kullanılamaz.",
+    "kesinlik": {
+      "sozcukler": ["kuşkusuz", "muhakkak", "elbette", "kesinlikle", "şüphesiz", "mutlaka", "kesin"],
+      "gerekce": "ogm-materyal.txt, ANLATIM BOZUKLUĞU SORULARI Q3 — 'Fırtına kuşkusuz ... sanırım' (kuşkusuz+sanırım çelişiyor, cevap D)"
+    },
+    "belirsizlik": {
+      "sozcukler": ["sanırım", "galiba", "belki", "zannedersem", "herhalde", "sanki"],
+      "gerekce": "aynı soru"
+    }
+  },
+  "yaklasiklik_sozcukleri": {
+    "sozcukler": ["yaklaşık", "kadar", "civarında", "tahminen", "aşağı yukarı"],
+    "gerekce": "ogm-materyal.txt Q5 ('yaklaşık bin kadar', cevap: gereksiz sözcük kullanımı) ve Q17 seçenek A ('yaklaşık bin civarında') — ikisi de aynı ikili kullanımda iki yaklaşıklık sözcüğü taşıyor"
+  },
+  "esanlamli_ciftler": [
+    {"cift": ["ilgili", "alaka"], "gerekce": "ogm-materyal.txt Q11 — '...ile ilgili ve alakalı kavramları...' (cevap E: alakalı gereksiz)"},
+    {"cift": ["sanki", "gibi"], "gerekce": "ogm-materyal.txt Q19 (III) — 'sanki bir rüyayı yorumlar gibi' (cevap C)"},
+    {"cift": ["sefer", "kez"], "gerekce": "ogm-materyal.txt Q2 — 'her seferinde her kezinde' (cevap B)"}
+  ],
+  "degismez_nitelikler": {
+    "aciklama": "İsmin DOĞASI gereği zaten taşıdığı bir niteliği yineleyen sıfat, o isimden hemen önce gelirse gereksiz sözcük kullanımıdır (örn. kar zaten beyazdır).",
+    "kayitlar": [
+      {"isim": "kar", "sifat": "beyaz", "gerekce": "ogm-materyal.txt Q17 seçenek D — 'Beyaz kar taneleri' (cevap D)"}
+    ]
+  },
+  "cogul_ima_eden_belirsizlik_sifatlari": {
+    "sozcukler": ["birçok", "birkaç"],
+    "gerekce": "ogm-materyal.txt Q31 (II) — 'birçok türlerde' (cevap B): 'birçok' zaten çoğulu ima eder, ismin ayrıca -lAr almasına gerek yoktur ('birçok tür' doğru, 'birçok türler' yanlış)"
+  }
+}

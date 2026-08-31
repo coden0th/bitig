@@ -1,0 +1,1198 @@
+{
+  "surum": "1.0.0",
+  "kapsam": "Ad çekimi, fiil çekimi (kip/kişi/çatı/fiilimsi/birleşik kip) ve yaygın yapım ekleri.",
+  "arketip_gosterimi": {
+    "A": "geniş-düz ünlü; büyük ünlü uyumuna göre a/e",
+    "I": "dar ünlü; büyük+küçük ünlü uyumuna göre ı/i/u/ü",
+    "D": "ünsüz benzeşmesine göre d/t",
+    "C": "ünsüz benzeşmesine göre c/ç",
+    "+X": "kaynaştırma: X yalnızca gövde ÜNLÜYLE bitiyorsa görünür",
+    "(X)": "yardımcı ünlü: X yalnızca gövde ÜNSÜZLE bitiyorsa görünür",
+    "G": "ünsüz benzeşmesine göre g/k (sev-gi ama as-kı)"
+  },
+  "aciklama": [
+    "Ek listesi koda gömülmez. Kod bu grafı yorumlar (CLAUDE.md §6).",
+    "",
+    "İyelik 3. tekilden sonra hâl ekleri 'y' yerine 'n' kaynaştırması alır:",
+    "kapısı + nı → kapısını. Bu yüzden IYELIK3_SONRASI ayrı bir durumdur ve",
+    "kendi hâl ekleri vardır. Aynı eki tek tanımla iki farklı kaynaştırmayla",
+    "kullanmak yerine ayrı tanımlanması bilinçlidir: graf açık kalır.",
+    "",
+    "'gerektirir' ekin gelebilmesi için gövdede BULUNMASI gereken öznitelikler,",
+    "'yasaklar' ise BULUNMAMASI gerekenler. İkincisi yapım eklerini harf adlarına",
+    "(ge, te, re...) bağlanmaktan alıkoyar; aksi hâlde 'ge'+'-lA' uydurma bir",
+    "'gele-' fiili üretip 'geliyor'a sahte ünlü daralması okuması ekliyordu."
+  ],
+  "baslangic_durumlari": {
+    "Noun": "ISIM_KOK",
+    "Adj": "ISIM_KOK",
+    "Dup": "ISIM_KOK",
+    "Num": "ISIM_KOK",
+    "Pron": "ISIM_KOK",
+    "Verb": "FIIL_KOK",
+    "Conj": "DEGISMEZ",
+    "Postp": "DEGISMEZ",
+    "Interj": "DEGISMEZ",
+    "Adv": "ZARF_KOK",
+    "Ques": "SORU_EKI_SONRASI",
+    "Det": "DEGISMEZ",
+    "Punc": "DEGISMEZ"
+  },
+  "durumlar": {
+    "ISIM_KOK": {
+      "bitebilir": true,
+      "aciklama": "Çıplak kök de geçerli bir sözcüktür"
+    },
+    "COGUL_SONRASI": {
+      "bitebilir": true
+    },
+    "IYELIK_SONRASI": {
+      "bitebilir": true
+    },
+    "IYELIK3_SONRASI": {
+      "bitebilir": true,
+      "aciklama": "Hâl ekleri n kaynaştırması alır"
+    },
+    "HAL_SONRASI": {
+      "bitebilir": true
+    },
+    "ILGI_SONRASI": {
+      "bitebilir": true
+    },
+    "FIIL_KOK": {
+      "bitebilir": true,
+      "aciklama": "Çıplak kök = 2. tekil emir (gel!)"
+    },
+    "OLUMSUZ": {
+      "bitebilir": false,
+      "aciklama": "-mA tek başına çekim değildir"
+    },
+    "KIP_ZAMIR": {
+      "bitebilir": true,
+      "aciklama": "Kişi eki zamir kökenlidir: -Im/-sIn/-Iz/-sInIz (geliyor-um)"
+    },
+    "KIP_IYELIK": {
+      "bitebilir": true,
+      "aciklama": "Kişi eki iyelik kökenlidir: -m/-n/-k/-nIz (geldi-m). -DI ve -sA sonrası"
+    },
+    "KISI_SONRASI": {
+      "bitebilir": true
+    },
+    "EMIR_SONRASI": {
+      "bitebilir": true
+    },
+    "ISIM_FIIL_MAK": {
+      "bitebilir": true,
+      "aciklama": "-mAk çekim almaz; 'yazmaya' = yazma+ya olarak çözümlenir, yazmak+a değil"
+    },
+    "ZARF_FIIL": {
+      "bitebilir": true,
+      "aciklama": "Zarf-fiiller ek almaz"
+    },
+    "DEGISMEZ": {
+      "bitebilir": true,
+      "aciklama": "Çekim almayan türler: bağlaç, edat, ünlem, zarf, belirteç. Çıkışsız durum — 've', 'ama', 'kadar' kendi başlarına geçerli sözcüklerdir ve çözümlenemez sayılmamalıdır"
+    },
+    "SORU_EKI_SONRASI": {
+      "bitebilir": true,
+      "aciklama": "Soru eki ('mi') çekim almaz ama ek-fiil alır: 'miyim', 'miydi', 'miymiş'. Tam ISIM_KOK değil — HAL/IYELIK/COGUL/YAPIM eki almaz ('minin', 'milik' üretilmemeli), yalnızca ek-fiil ekleri buradan kaynaklanır"
+    },
+    "ZARF_KOK": {
+      "bitebilir": true,
+      "aciklama": "Zarflar (Adv) çoğunlukla çekim almaz ama aitlik eki (-ki) doğrudan alabilir: sonraki, yarınki, bugünkü, dünkü. Tam ISIM_KOK değil — HAL/IYELIK/COGUL eki almaz, yalnızca EK.AITLIK buradan kaynaklanır"
+    }
+  },
+  "ekler": [
+    {
+      "kimlik": "EK.COGUL",
+      "ad": "Çoğul",
+      "arketip": "lAr",
+      "kaynak": [
+        "ISIM_KOK"
+      ],
+      "hedef": "COGUL_SONRASI"
+    },
+    {
+      "kimlik": "EK.IYELIK.1T",
+      "ad": "İyelik 1. tekil",
+      "arketip": "(I)m",
+      "kaynak": [
+        "ISIM_KOK",
+        "COGUL_SONRASI"
+      ],
+      "hedef": "IYELIK_SONRASI"
+    },
+    {
+      "kimlik": "EK.IYELIK.2T",
+      "ad": "İyelik 2. tekil",
+      "arketip": "(I)n",
+      "kaynak": [
+        "ISIM_KOK",
+        "COGUL_SONRASI"
+      ],
+      "hedef": "IYELIK_SONRASI"
+    },
+    {
+      "kimlik": "EK.IYELIK.3T",
+      "ad": "İyelik 3. tekil",
+      "arketip": "+sI",
+      "kaynak": [
+        "ISIM_KOK",
+        "COGUL_SONRASI"
+      ],
+      "hedef": "IYELIK3_SONRASI"
+    },
+    {
+      "kimlik": "EK.IYELIK.1C",
+      "ad": "İyelik 1. çoğul",
+      "arketip": "(I)mIz",
+      "kaynak": [
+        "ISIM_KOK",
+        "COGUL_SONRASI"
+      ],
+      "hedef": "IYELIK_SONRASI"
+    },
+    {
+      "kimlik": "EK.IYELIK.2C",
+      "ad": "İyelik 2. çoğul",
+      "arketip": "(I)nIz",
+      "kaynak": [
+        "ISIM_KOK",
+        "COGUL_SONRASI"
+      ],
+      "hedef": "IYELIK_SONRASI"
+    },
+    {
+      "kimlik": "EK.IYELIK.3C",
+      "ad": "İyelik 3. çoğul",
+      "arketip": "lArI",
+      "kaynak": [
+        "ISIM_KOK"
+      ],
+      "hedef": "IYELIK3_SONRASI"
+    },
+    {
+      "kimlik": "EK.HAL.BEL",
+      "ad": "Belirtme hâli",
+      "arketip": "+yI",
+      "kaynak": [
+        "ISIM_KOK",
+        "COGUL_SONRASI",
+        "IYELIK_SONRASI"
+      ],
+      "hedef": "HAL_SONRASI"
+    },
+    {
+      "kimlik": "EK.HAL.YON",
+      "ad": "Yönelme hâli",
+      "arketip": "+yA",
+      "kaynak": [
+        "ISIM_KOK",
+        "COGUL_SONRASI",
+        "IYELIK_SONRASI"
+      ],
+      "hedef": "HAL_SONRASI"
+    },
+    {
+      "kimlik": "EK.HAL.BUL",
+      "ad": "Bulunma hâli",
+      "arketip": "DA",
+      "kaynak": [
+        "ISIM_KOK",
+        "COGUL_SONRASI",
+        "IYELIK_SONRASI",
+        "ISIM_FIIL_MAK"
+      ],
+      "hedef": "HAL_SONRASI"
+    },
+    {
+      "kimlik": "EK.HAL.AYR",
+      "ad": "Ayrılma hâli",
+      "arketip": "DAn",
+      "kaynak": [
+        "ISIM_KOK",
+        "COGUL_SONRASI",
+        "IYELIK_SONRASI",
+        "ISIM_FIIL_MAK"
+      ],
+      "hedef": "HAL_SONRASI"
+    },
+    {
+      "kimlik": "EK.HAL.ILG",
+      "ad": "İlgi hâli",
+      "arketip": "+nIn",
+      "kaynak": [
+        "ISIM_KOK",
+        "COGUL_SONRASI",
+        "IYELIK_SONRASI"
+      ],
+      "hedef": "ILGI_SONRASI"
+    },
+    {
+      "kimlik": "EK.HAL.VASITA",
+      "ad": "Vasıta hâli",
+      "arketip": "+ylA",
+      "kaynak": [
+        "ISIM_KOK",
+        "COGUL_SONRASI",
+        "IYELIK_SONRASI",
+        "IYELIK3_SONRASI"
+      ],
+      "hedef": "HAL_SONRASI"
+    },
+    {
+      "kimlik": "EK.AITLIK",
+      "ad": "Aitlik eki",
+      "arketip": "ki",
+      "kaynak": [
+        "HAL_SONRASI",
+        "ILGI_SONRASI",
+        "ZARF_KOK"
+      ],
+      "hedef": "ISIM_KOK"
+    },
+    {
+      "kimlik": "EK.HAL.BEL.N",
+      "ad": "Belirtme hâli",
+      "arketip": "+nI",
+      "kaynak": [
+        "IYELIK3_SONRASI"
+      ],
+      "hedef": "HAL_SONRASI"
+    },
+    {
+      "kimlik": "EK.HAL.YON.N",
+      "ad": "Yönelme hâli",
+      "arketip": "+nA",
+      "kaynak": [
+        "IYELIK3_SONRASI"
+      ],
+      "hedef": "HAL_SONRASI"
+    },
+    {
+      "kimlik": "EK.HAL.BUL.N",
+      "ad": "Bulunma hâli",
+      "arketip": "+ndA",
+      "kaynak": [
+        "IYELIK3_SONRASI"
+      ],
+      "hedef": "HAL_SONRASI"
+    },
+    {
+      "kimlik": "EK.HAL.AYR.N",
+      "ad": "Ayrılma hâli",
+      "arketip": "+ndAn",
+      "kaynak": [
+        "IYELIK3_SONRASI"
+      ],
+      "hedef": "HAL_SONRASI"
+    },
+    {
+      "kimlik": "EK.HAL.ILG.N",
+      "ad": "İlgi hâli",
+      "arketip": "+nIn",
+      "kaynak": [
+        "IYELIK3_SONRASI"
+      ],
+      "hedef": "ILGI_SONRASI"
+    },
+    {
+      "kimlik": "EK.FIIL.OLUMSUZ",
+      "ad": "Olumsuzluk",
+      "arketip": "mA",
+      "oznitelikler": [
+        "ProgressiveVowelDrop"
+      ],
+      "kaynak": [
+        "FIIL_KOK"
+      ],
+      "hedef": "OLUMSUZ"
+    },
+    {
+      "kimlik": "EK.KIP.GECMIS",
+      "ad": "Görülen geçmiş zaman",
+      "arketip": "DI",
+      "kaynak": [
+        "FIIL_KOK",
+        "OLUMSUZ"
+      ],
+      "hedef": "KIP_IYELIK"
+    },
+    {
+      "kimlik": "EK.KIP.DUYULAN",
+      "ad": "Duyulan geçmiş zaman",
+      "arketip": "mIş",
+      "kaynak": [
+        "FIIL_KOK",
+        "OLUMSUZ"
+      ],
+      "hedef": "KIP_ZAMIR"
+    },
+    {
+      "kimlik": "EK.KIP.SIMDIKI",
+      "ad": "Şimdiki zaman",
+      "arketip": "Iyor",
+      "daraltir": true,
+      "kaynak": [
+        "FIIL_KOK",
+        "OLUMSUZ"
+      ],
+      "hedef": "KIP_ZAMIR"
+    },
+    {
+      "kimlik": "EK.KIP.GELECEK",
+      "ad": "Gelecek zaman",
+      "arketip": "+yAcAk",
+      "oznitelikler": [
+        "Voicing"
+      ],
+      "kaynak": [
+        "FIIL_KOK",
+        "OLUMSUZ"
+      ],
+      "hedef": "KIP_ZAMIR"
+    },
+    {
+      "kimlik": "EK.KIP.GENIS.I",
+      "ad": "Geniş zaman",
+      "arketip": "(I)r",
+      "gerektirir": [
+        "Aorist_I"
+      ],
+      "kaynak": [
+        "FIIL_KOK"
+      ],
+      "hedef": "KIP_ZAMIR"
+    },
+    {
+      "kimlik": "EK.KIP.GENIS.A",
+      "ad": "Geniş zaman",
+      "arketip": "(A)r",
+      "gerektirir": [
+        "Aorist_A"
+      ],
+      "kaynak": [
+        "FIIL_KOK"
+      ],
+      "hedef": "KIP_ZAMIR"
+    },
+    {
+      "kimlik": "EK.KIP.GENIS.OLUMSUZ",
+      "ad": "Geniş zaman olumsuz",
+      "arketip": "mAz",
+      "kaynak": [
+        "FIIL_KOK"
+      ],
+      "hedef": "KIP_ZAMIR"
+    },
+    {
+      "kimlik": "EK.KIP.GEREKLILIK",
+      "ad": "Gereklilik kipi",
+      "arketip": "mAlI",
+      "kaynak": [
+        "FIIL_KOK",
+        "OLUMSUZ"
+      ],
+      "hedef": "KIP_ZAMIR"
+    },
+    {
+      "kimlik": "EK.KIP.SART",
+      "ad": "Şart kipi",
+      "arketip": "sA",
+      "kaynak": [
+        "FIIL_KOK",
+        "OLUMSUZ"
+      ],
+      "hedef": "KIP_IYELIK"
+    },
+    {
+      "kimlik": "EK.KIP.ISTEK.1T",
+      "ad": "İstek kipi 1. tekil",
+      "arketip": "+yAyIm",
+      "kaynak": [
+        "FIIL_KOK",
+        "OLUMSUZ"
+      ],
+      "hedef": "KISI_SONRASI"
+    },
+    {
+      "kimlik": "EK.KIP.ISTEK.2T",
+      "ad": "İstek kipi 2. tekil",
+      "arketip": "+yAsIn",
+      "kaynak": [
+        "FIIL_KOK",
+        "OLUMSUZ"
+      ],
+      "hedef": "KISI_SONRASI"
+    },
+    {
+      "kimlik": "EK.KIP.ISTEK.1C",
+      "ad": "İstek kipi 1. çoğul",
+      "arketip": "+yAlIm",
+      "kaynak": [
+        "FIIL_KOK",
+        "OLUMSUZ"
+      ],
+      "hedef": "KISI_SONRASI"
+    },
+    {
+      "kimlik": "EK.KIP.ISTEK.2C",
+      "ad": "İstek kipi 2. çoğul",
+      "arketip": "+yAsInIz",
+      "kaynak": [
+        "FIIL_KOK",
+        "OLUMSUZ"
+      ],
+      "hedef": "KISI_SONRASI"
+    },
+    {
+      "kimlik": "EK.KISI.Z.1T",
+      "ad": "1. tekil kişi",
+      "arketip": "+yIm",
+      "kaynak": [
+        "KIP_ZAMIR",
+        "ISIM_KOK",
+        "HAL_SONRASI",
+        "IYELIK_SONRASI",
+        "IYELIK3_SONRASI",
+        "COGUL_SONRASI",
+        "SORU_EKI_SONRASI"
+      ],
+      "hedef": "KISI_SONRASI"
+    },
+    {
+      "kimlik": "EK.KISI.Z.2T",
+      "ad": "2. tekil kişi",
+      "arketip": "sIn",
+      "kaynak": [
+        "KIP_ZAMIR",
+        "ISIM_KOK",
+        "HAL_SONRASI",
+        "IYELIK_SONRASI",
+        "IYELIK3_SONRASI",
+        "COGUL_SONRASI",
+        "SORU_EKI_SONRASI"
+      ],
+      "hedef": "KISI_SONRASI"
+    },
+    {
+      "kimlik": "EK.KISI.Z.1C",
+      "ad": "1. çoğul kişi",
+      "arketip": "+yIz",
+      "kaynak": [
+        "KIP_ZAMIR",
+        "ISIM_KOK",
+        "HAL_SONRASI",
+        "IYELIK_SONRASI",
+        "IYELIK3_SONRASI",
+        "COGUL_SONRASI",
+        "SORU_EKI_SONRASI"
+      ],
+      "hedef": "KISI_SONRASI"
+    },
+    {
+      "kimlik": "EK.KISI.Z.2C",
+      "ad": "2. çoğul kişi",
+      "arketip": "sInIz",
+      "kaynak": [
+        "KIP_ZAMIR",
+        "ISIM_KOK",
+        "HAL_SONRASI",
+        "IYELIK_SONRASI",
+        "IYELIK3_SONRASI",
+        "COGUL_SONRASI",
+        "SORU_EKI_SONRASI"
+      ],
+      "hedef": "KISI_SONRASI"
+    },
+    {
+      "kimlik": "EK.KISI.Z.3C",
+      "ad": "3. çoğul kişi",
+      "arketip": "lAr",
+      "kaynak": [
+        "KIP_ZAMIR",
+        "ISIM_KOK",
+        "HAL_SONRASI",
+        "IYELIK_SONRASI",
+        "IYELIK3_SONRASI",
+        "COGUL_SONRASI",
+        "SORU_EKI_SONRASI"
+      ],
+      "hedef": "KISI_SONRASI"
+    },
+    {
+      "kimlik": "EK.KISI.I.1T",
+      "ad": "1. tekil kişi",
+      "arketip": "m",
+      "kaynak": [
+        "KIP_IYELIK"
+      ],
+      "hedef": "KISI_SONRASI"
+    },
+    {
+      "kimlik": "EK.KISI.I.2T",
+      "ad": "2. tekil kişi",
+      "arketip": "n",
+      "kaynak": [
+        "KIP_IYELIK"
+      ],
+      "hedef": "KISI_SONRASI"
+    },
+    {
+      "kimlik": "EK.KISI.I.1C",
+      "ad": "1. çoğul kişi",
+      "arketip": "k",
+      "kaynak": [
+        "KIP_IYELIK"
+      ],
+      "hedef": "KISI_SONRASI"
+    },
+    {
+      "kimlik": "EK.KISI.I.2C",
+      "ad": "2. çoğul kişi",
+      "arketip": "nIz",
+      "kaynak": [
+        "KIP_IYELIK"
+      ],
+      "hedef": "KISI_SONRASI"
+    },
+    {
+      "kimlik": "EK.KISI.I.3C",
+      "ad": "3. çoğul kişi",
+      "arketip": "lAr",
+      "kaynak": [
+        "KIP_IYELIK"
+      ],
+      "hedef": "KISI_SONRASI"
+    },
+    {
+      "kimlik": "EK.EMIR.3T",
+      "ad": "3. tekil emir",
+      "arketip": "sIn",
+      "kaynak": [
+        "FIIL_KOK",
+        "OLUMSUZ"
+      ],
+      "hedef": "EMIR_SONRASI"
+    },
+    {
+      "kimlik": "EK.EMIR.2C",
+      "ad": "2. çoğul emir",
+      "arketip": "+yIn",
+      "kaynak": [
+        "FIIL_KOK",
+        "OLUMSUZ"
+      ],
+      "hedef": "EMIR_SONRASI"
+    },
+    {
+      "kimlik": "EK.YAPIM.LI",
+      "ad": "İsimden sıfat (-lI)",
+      "arketip": "lI",
+      "kaynak": [
+        "ISIM_KOK",
+        "IYELIK3_SONRASI"
+      ],
+      "hedef": "ISIM_KOK",
+      "yasaklar": [
+        "YapimAlmaz"
+      ]
+    },
+    {
+      "kimlik": "EK.YAPIM.SIZ",
+      "ad": "İsimden sıfat (-sIz)",
+      "arketip": "sIz",
+      "kaynak": [
+        "ISIM_KOK"
+      ],
+      "hedef": "ISIM_KOK",
+      "yasaklar": [
+        "YapimAlmaz"
+      ]
+    },
+    {
+      "kimlik": "EK.YAPIM.LIK",
+      "ad": "İsimden isim (-lIk)",
+      "arketip": "lIk",
+      "oznitelikler": [
+        "Voicing"
+      ],
+      "kaynak": [
+        "ISIM_KOK"
+      ],
+      "hedef": "ISIM_KOK",
+      "yasaklar": [
+        "YapimAlmaz"
+      ]
+    },
+    {
+      "kimlik": "EK.YAPIM.CI",
+      "ad": "İsimden isim (-CI)",
+      "arketip": "CI",
+      "kaynak": [
+        "ISIM_KOK"
+      ],
+      "hedef": "ISIM_KOK",
+      "yasaklar": [
+        "YapimAlmaz"
+      ]
+    },
+    {
+      "kimlik": "EK.YAPIM.CIK",
+      "ad": "Küçültme (-CIk)",
+      "arketip": "CIk",
+      "oznitelikler": [
+        "Voicing"
+      ],
+      "dusurur_unsuz": true,
+      "kaynak": [
+        "ISIM_KOK"
+      ],
+      "hedef": "ISIM_KOK",
+      "yasaklar": [
+        "YapimAlmaz"
+      ]
+    },
+    {
+      "kimlik": "EK.YAPIM.CA",
+      "ad": "Eşitlik / isimden zarf (-CA)",
+      "arketip": "CA",
+      "kaynak": [
+        "ISIM_KOK"
+      ],
+      "hedef": "ISIM_KOK",
+      "yasaklar": [
+        "YapimAlmaz"
+      ]
+    },
+    {
+      "kimlik": "EK.YAPIM.SAL",
+      "ad": "İsimden sıfat (-sAl)",
+      "arketip": "sAl",
+      "kaynak": [
+        "ISIM_KOK"
+      ],
+      "hedef": "ISIM_KOK",
+      "yasaklar": [
+        "YapimAlmaz"
+      ]
+    },
+    {
+      "kimlik": "EK.YAPIM.DAS",
+      "ad": "İsimden isim (-DAş)",
+      "arketip": "DAş",
+      "kaynak": [
+        "ISIM_KOK"
+      ],
+      "hedef": "ISIM_KOK",
+      "yasaklar": [
+        "YapimAlmaz"
+      ]
+    },
+    {
+      "kimlik": "EK.YAPIM.LA",
+      "ad": "İsimden fiil (-lA)",
+      "arketip": "lA",
+      "oznitelikler": [
+        "ProgressiveVowelDrop",
+        "Aorist_I"
+      ],
+      "kaynak": [
+        "ISIM_KOK"
+      ],
+      "hedef": "FIIL_KOK",
+      "yasaklar": [
+        "YapimAlmaz"
+      ]
+    },
+    {
+      "kimlik": "EK.YAPIM.LAN",
+      "ad": "İsimden fiil (-lAn)",
+      "arketip": "lAn",
+      "oznitelikler": [
+        "Aorist_I"
+      ],
+      "kaynak": [
+        "ISIM_KOK"
+      ],
+      "hedef": "FIIL_KOK",
+      "yasaklar": [
+        "YapimAlmaz"
+      ]
+    },
+    {
+      "kimlik": "EK.YAPIM.LAS",
+      "ad": "İsimden fiil (-lAş)",
+      "arketip": "lAş",
+      "oznitelikler": [
+        "Aorist_I"
+      ],
+      "kaynak": [
+        "ISIM_KOK"
+      ],
+      "hedef": "FIIL_KOK",
+      "yasaklar": [
+        "YapimAlmaz"
+      ]
+    },
+    {
+      "kimlik": "EK.YAPIM.ICI",
+      "ad": "Fiilden isim (-IcI)",
+      "arketip": "+yIcI",
+      "kaynak": [
+        "FIIL_KOK"
+      ],
+      "hedef": "ISIM_KOK",
+      "yasaklar": [
+        "YapimAlmaz"
+      ]
+    },
+    {
+      "kimlik": "EK.YAPIM.IM",
+      "ad": "Fiilden isim (-Im)",
+      "arketip": "(I)m",
+      "kaynak": [
+        "FIIL_KOK"
+      ],
+      "hedef": "ISIM_KOK",
+      "yasaklar": [
+        "YapimAlmaz"
+      ]
+    },
+    {
+      "kimlik": "EK.YAPIM.GI",
+      "ad": "Fiilden isim (-GI)",
+      "arketip": "GI",
+      "kaynak": [
+        "FIIL_KOK"
+      ],
+      "hedef": "ISIM_KOK",
+      "yasaklar": [
+        "YapimAlmaz"
+      ]
+    },
+    {
+      "kimlik": "EK.ZARFFIIL.DIKCA",
+      "ad": "Zarf-fiil (-DIkçA)",
+      "arketip": "DIkçA",
+      "kaynak": [
+        "FIIL_KOK",
+        "OLUMSUZ"
+      ],
+      "hedef": "ZARF_FIIL"
+    },
+    {
+      "kimlik": "EK.YETERLILIK",
+      "ad": "Yeterlilik",
+      "arketip": "+yAbil",
+      "oznitelikler": [
+        "Aorist_I"
+      ],
+      "kaynak": [
+        "FIIL_KOK"
+      ],
+      "hedef": "FIIL_KOK"
+    },
+    {
+      "kimlik": "EK.YETERSIZLIK",
+      "ad": "Yetersizlik",
+      "arketip": "+yAmA",
+      "oznitelikler": [
+        "ProgressiveVowelDrop"
+      ],
+      "kaynak": [
+        "FIIL_KOK"
+      ],
+      "hedef": "OLUMSUZ"
+    },
+    {
+      "kimlik": "EK.YETERSIZLIK.GENIS",
+      "ad": "Yetersizlik (geniş zaman)",
+      "arketip": "+yAmAz",
+      "kaynak": [
+        "FIIL_KOK"
+      ],
+      "hedef": "KIP_ZAMIR"
+    },
+    {
+      "kimlik": "EK.TASVIR.TEZLIK",
+      "ad": "Tezlik (kurallı birleşik fiil)",
+      "arketip": "+yIver",
+      "oznitelikler": [
+        "Aorist_I"
+      ],
+      "kaynak": [
+        "FIIL_KOK"
+      ],
+      "hedef": "FIIL_KOK"
+    },
+    {
+      "kimlik": "EK.TASVIR.SUREKLILIK.GEL",
+      "ad": "Süreklilik (kurallı birleşik fiil)",
+      "arketip": "+yAgel",
+      "oznitelikler": [
+        "Aorist_I"
+      ],
+      "kaynak": [
+        "FIIL_KOK"
+      ],
+      "hedef": "FIIL_KOK"
+    },
+    {
+      "kimlik": "EK.TASVIR.SUREKLILIK.DUR",
+      "ad": "Süreklilik (kurallı birleşik fiil)",
+      "arketip": "+yAdur",
+      "oznitelikler": [
+        "Aorist_I"
+      ],
+      "kaynak": [
+        "FIIL_KOK"
+      ],
+      "hedef": "FIIL_KOK"
+    },
+    {
+      "kimlik": "EK.TASVIR.SUREKLILIK.KAL",
+      "ad": "Süreklilik (kurallı birleşik fiil)",
+      "arketip": "+yAkal",
+      "oznitelikler": [
+        "Aorist_I"
+      ],
+      "kaynak": [
+        "FIIL_KOK"
+      ],
+      "hedef": "FIIL_KOK"
+    },
+    {
+      "kimlik": "EK.TASVIR.SUREKLILIK.GOR",
+      "ad": "Süreklilik (kurallı birleşik fiil)",
+      "arketip": "+yAgör",
+      "oznitelikler": [
+        "Aorist_I"
+      ],
+      "kaynak": [
+        "FIIL_KOK"
+      ],
+      "hedef": "FIIL_KOK"
+    },
+    {
+      "kimlik": "EK.TASVIR.YAKLASMA",
+      "ad": "Yaklaşma (kurallı birleşik fiil)",
+      "arketip": "+yAyaz",
+      "oznitelikler": [
+        "Aorist_I"
+      ],
+      "kaynak": [
+        "FIIL_KOK"
+      ],
+      "hedef": "FIIL_KOK"
+    },
+    {
+      "kimlik": "EK.BILDIRME",
+      "ad": "Bildirme eki",
+      "arketip": "DIr",
+      "kaynak": [
+        "KIP_ZAMIR",
+        "ISIM_KOK",
+        "HAL_SONRASI",
+        "IYELIK_SONRASI",
+        "IYELIK3_SONRASI",
+        "COGUL_SONRASI",
+        "SORU_EKI_SONRASI"
+      ],
+      "hedef": "KISI_SONRASI"
+    },
+    {
+      "kimlik": "EK.ZARFFIIL.KEN.ISIM",
+      "ad": "İken (zarf-fiil)",
+      "arketip": "+yken",
+      "kaynak": [
+        "ISIM_KOK",
+        "HAL_SONRASI"
+      ],
+      "hedef": "ZARF_FIIL"
+    },
+    {
+      "kimlik": "EK.CATI.EDILGEN.IL",
+      "ad": "Edilgen çatı",
+      "arketip": "Il",
+      "oznitelikler": [
+        "Aorist_I"
+      ],
+      "kaynak": [
+        "FIIL_KOK"
+      ],
+      "hedef": "FIIL_KOK"
+    },
+    {
+      "kimlik": "EK.CATI.EDILGEN.IN",
+      "ad": "Edilgen çatı",
+      "arketip": "(I)n",
+      "oznitelikler": [
+        "Aorist_I"
+      ],
+      "gerektirir": [
+        "Passive_In"
+      ],
+      "kaynak": [
+        "FIIL_KOK"
+      ],
+      "hedef": "FIIL_KOK"
+    },
+    {
+      "kimlik": "EK.CATI.DONUSLU.IL",
+      "ad": "Dönüşlü çatı",
+      "arketip": "Il",
+      "oznitelikler": [
+        "Aorist_I"
+      ],
+      "kaynak": [
+        "FIIL_KOK"
+      ],
+      "hedef": "FIIL_KOK"
+    },
+    {
+      "kimlik": "EK.CATI.DONUSLU.IN",
+      "ad": "Dönüşlü çatı",
+      "arketip": "(I)n",
+      "oznitelikler": [
+        "Aorist_I"
+      ],
+      "gerektirir": [
+        "Passive_In"
+      ],
+      "kaynak": [
+        "FIIL_KOK"
+      ],
+      "hedef": "FIIL_KOK"
+    },
+    {
+      "kimlik": "EK.CATI.ISTES",
+      "ad": "İşteş çatı",
+      "arketip": "Iş",
+      "oznitelikler": [
+        "Aorist_I"
+      ],
+      "kaynak": [
+        "FIIL_KOK"
+      ],
+      "hedef": "FIIL_KOK"
+    },
+    {
+      "kimlik": "EK.CATI.ETTIRGEN.DIR",
+      "ad": "Ettirgen çatı",
+      "arketip": "DIr",
+      "oznitelikler": [
+        "Aorist_I"
+      ],
+      "kaynak": [
+        "FIIL_KOK"
+      ],
+      "hedef": "FIIL_KOK"
+    },
+    {
+      "kimlik": "EK.CATI.ETTIRGEN.T",
+      "ad": "Ettirgen çatı",
+      "arketip": "t",
+      "oznitelikler": [
+        "Aorist_I"
+      ],
+      "gerektirir": [
+        "Causative_t"
+      ],
+      "kaynak": [
+        "FIIL_KOK"
+      ],
+      "hedef": "FIIL_KOK"
+    },
+    {
+      "kimlik": "EK.BIRLESIK.HIKAYE",
+      "ad": "Hikâye birleşik kipi",
+      "arketip": "+yDI",
+      "kaynak": [
+        "KIP_ZAMIR",
+        "KIP_IYELIK",
+        "ISIM_KOK",
+        "HAL_SONRASI",
+        "IYELIK_SONRASI",
+        "IYELIK3_SONRASI",
+        "COGUL_SONRASI",
+        "SORU_EKI_SONRASI"
+      ],
+      "hedef": "KIP_IYELIK"
+    },
+    {
+      "kimlik": "EK.BIRLESIK.RIVAYET",
+      "ad": "Rivayet birleşik kipi",
+      "arketip": "+ymIş",
+      "kaynak": [
+        "KIP_ZAMIR",
+        "ISIM_KOK",
+        "HAL_SONRASI",
+        "IYELIK_SONRASI",
+        "IYELIK3_SONRASI",
+        "COGUL_SONRASI",
+        "SORU_EKI_SONRASI"
+      ],
+      "hedef": "KIP_ZAMIR"
+    },
+    {
+      "kimlik": "EK.BIRLESIK.SART",
+      "ad": "Şart birleşik kipi",
+      "arketip": "+ysA",
+      "kaynak": [
+        "KIP_ZAMIR",
+        "ISIM_KOK",
+        "HAL_SONRASI",
+        "IYELIK_SONRASI",
+        "IYELIK3_SONRASI",
+        "COGUL_SONRASI",
+        "SORU_EKI_SONRASI"
+      ],
+      "hedef": "KIP_IYELIK"
+    },
+    {
+      "kimlik": "EK.ISIMFIIL.MAK",
+      "ad": "İsim-fiil",
+      "arketip": "mAk",
+      "kaynak": [
+        "FIIL_KOK",
+        "OLUMSUZ"
+      ],
+      "hedef": "ISIM_FIIL_MAK"
+    },
+    {
+      "kimlik": "EK.ISIMFIIL.MA",
+      "ad": "İsim-fiil",
+      "arketip": "mA",
+      "kaynak": [
+        "FIIL_KOK",
+        "OLUMSUZ"
+      ],
+      "hedef": "ISIM_KOK"
+    },
+    {
+      "kimlik": "EK.ISIMFIIL.IS",
+      "ad": "İsim-fiil",
+      "arketip": "+yIş",
+      "kaynak": [
+        "FIIL_KOK"
+      ],
+      "hedef": "ISIM_KOK"
+    },
+    {
+      "kimlik": "EK.SIFATFIIL.AN",
+      "ad": "Sıfat-fiil",
+      "arketip": "+yAn",
+      "kaynak": [
+        "FIIL_KOK",
+        "OLUMSUZ"
+      ],
+      "hedef": "ISIM_KOK"
+    },
+    {
+      "kimlik": "EK.SIFATFIIL.DIK",
+      "ad": "Sıfat-fiil",
+      "arketip": "DIk",
+      "oznitelikler": [
+        "Voicing"
+      ],
+      "kaynak": [
+        "FIIL_KOK",
+        "OLUMSUZ"
+      ],
+      "hedef": "ISIM_KOK"
+    },
+    {
+      "kimlik": "EK.SIFATFIIL.ACAK",
+      "ad": "Sıfat-fiil",
+      "arketip": "+yAcAk",
+      "oznitelikler": [
+        "Voicing"
+      ],
+      "kaynak": [
+        "FIIL_KOK",
+        "OLUMSUZ"
+      ],
+      "hedef": "ISIM_KOK"
+    },
+    {
+      "kimlik": "EK.SIFATFIIL.MIS",
+      "ad": "Sıfat-fiil",
+      "arketip": "mIş",
+      "kaynak": [
+        "FIIL_KOK",
+        "OLUMSUZ"
+      ],
+      "hedef": "ISIM_KOK"
+    },
+    {
+      "kimlik": "EK.SIFATFIIL.MAZ",
+      "ad": "Sıfat-fiil",
+      "arketip": "mAz",
+      "kaynak": [
+        "FIIL_KOK"
+      ],
+      "hedef": "ISIM_KOK"
+    },
+    {
+      "kimlik": "EK.ZARFFIIL.ARAK",
+      "ad": "Zarf-fiil",
+      "arketip": "+yArAk",
+      "kaynak": [
+        "FIIL_KOK",
+        "OLUMSUZ"
+      ],
+      "hedef": "ZARF_FIIL"
+    },
+    {
+      "kimlik": "EK.ZARFFIIL.INCA",
+      "ad": "Zarf-fiil",
+      "arketip": "+yIncA",
+      "kaynak": [
+        "FIIL_KOK",
+        "OLUMSUZ"
+      ],
+      "hedef": "ZARF_FIIL"
+    },
+    {
+      "kimlik": "EK.ZARFFIIL.IP",
+      "ad": "Zarf-fiil",
+      "arketip": "+yIp",
+      "kaynak": [
+        "FIIL_KOK",
+        "OLUMSUZ"
+      ],
+      "hedef": "ZARF_FIIL"
+    },
+    {
+      "kimlik": "EK.ZARFFIIL.MADAN",
+      "ad": "Zarf-fiil",
+      "arketip": "mAdAn",
+      "kaynak": [
+        "FIIL_KOK"
+      ],
+      "hedef": "ZARF_FIIL"
+    },
+    {
+      "kimlik": "EK.ZARFFIIL.KEN",
+      "ad": "Zarf-fiil",
+      "arketip": "+yken",
+      "kaynak": [
+        "KIP_ZAMIR"
+      ],
+      "hedef": "ZARF_FIIL"
+    },
+    {
+      "kimlik": "EK.YAPIM.GIN",
+      "ad": "Fiilden isim/sıfat (-GIn)",
+      "arketip": "GIn",
+      "yasaklar": [
+        "YapimAlmaz"
+      ],
+      "kaynak": [
+        "FIIL_KOK"
+      ],
+      "hedef": "ISIM_KOK"
+    }
+  ]
+}

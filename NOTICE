@@ -1,0 +1,26 @@
+BitigAI
+Copyright 2026 BitigAI
+
+================================================================================
+Üçüncü taraf veri: Zemberek-NLP sözlükleri
+================================================================================
+
+`veri/zemberek/` altındaki sözlük dosyaları Zemberek-NLP projesinden alınmıştır:
+
+    Zemberek-NLP — https://github.com/ahmetaa/zemberek-nlp
+    Copyright 2007-2018 Ahmet A. Akın
+    Apache License, Version 2.0
+
+Dosyalar:
+    master-dictionary.dict
+    non-tdk.dict
+    proper.dict
+    proper-from-corpus.dict
+    abbreviations.dict
+
+Lisansın tam metni `veri/zemberek/LICENSE.zemberek` dosyasındadır. Bu dosyalar
+upstream'den değiştirilmeden kopyalanmıştır; BitigAI'nin kendi düzeltmeleri
+`veri/tyt_override.json` içinde ayrı tutulur, kaynak dosyalara dokunulmaz.
+
+BitigAI'nin çözümleme kodu Zemberek'ten türetilmemiştir; yalnızca yukarıdaki
+sözlük verisi kullanılmaktadır.

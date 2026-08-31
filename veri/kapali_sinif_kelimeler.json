@@ -1,0 +1,33 @@
+{
+  "_aciklama": "İsim Soylu Sözcükler (zamir/sıfat/zarf alt türleri, edat, bağlaç) kapalı sınıf envanteri. Kaynak: MEBİ TYT Konu Özetleri - Türkçe (2026, MEB Ortaöğretim Genel Müdürlüğü / MEBİ, ISBN 978-975-11-8474-0), s.83-98 (Zamir, Sıfat, Zarf, Edat/Bağlaç/Ünlem bölümleri). Bu, İsim Soylu Sözcükler domainini (bkz. CLAUDE.md §5) askıya alan 'kapalı sınıf sözlüğü yok' engelinin veri katmanıdır — TEK BAŞINA bir çözücü DEĞİLDİR. Birçok kelime (bu/şu/o, ne, bir, kaç, ile, da/de...) birden fazla kategoride görünür (aynı MEB kaynağının kendi 'DİKKAT' notlarında da vurgulandığı gibi); hangi kullanımın geçerli olduğu bağlama (izleyen kelime çıplak isim mi, kelimenin kendisi çekim eki alıyor mu) bakar. Bu dosya yalnızca MEB'in kendi 'başlıca X' listelerini taşır, tahmin/genelleme içermez.",
+  "zamir": {
+    "kisi": ["ben", "sen", "o", "biz", "siz", "onlar"],
+    "donusluluk": ["kendi"],
+    "isaret": ["bu", "şu", "o", "bunlar", "şunlar", "onlar", "öteki", "beriki", "böylesi", "şöylesi"],
+    "belgisiz": ["biri", "kimi", "birkaçı", "birçoğu", "hepsi", "herkes", "şey", "bazısı", "birazı", "herhangi biri"],
+    "soru": ["kim", "ne", "nere", "nereye", "nerede", "nereden", "hangisi"],
+    "_not": "İyelik zamiri (okulum/okulun/okulu...) ve ilgi zamiri (-ki, kardeşininki) ek hâlindedir, ayrı bir kelime listesiyle taşınamaz — motorun EK.IYELIK/EK.AITLIK kimlikleriyle zaten üretiliyor."
+  },
+  "sifat": {
+    "isaret": ["bu", "şu", "o"],
+    "soru": ["ne", "nasıl", "nice", "kaç", "kaçıncı", "hangi", "ne biçim", "ne türlü"],
+    "belgisiz": ["birkaç", "bütün", "bir", "birçok", "birtakım", "bazı", "her", "hiçbir", "herhangi bir"],
+    "_not": "Sayı sıfatı alt türleri (asıl/sıra/üleştirme/kesir/topluluk) kapalı sınıf değil, sayı+ek üretken bir dizi (iki, ikinci, ikişer, üçte bir, ikiz) — kelime listesi değil ek kimliği işi."
+  },
+  "zarf": {
+    "soru": ["nasıl", "ne zaman", "neden", "niçin", "ne kadar", "nereye", "nereden", "nerede"],
+    "_not": "Durum/zaman/yer-yön/miktar zarfları büyük ölçüde açık sınıf (üretken zarf-fiil + sıfat + isim kökenli biçimler) — yalnızca soru zarfı kapalı sınıf."
+  },
+  "edat": ["gibi", "ile", "kadar", "göre", "üzere", "diye", "karşı", "doğru", "dolayı", "ötürü"],
+  "baglac": ["ve", "ile", "çünkü", "fakat", "ama", "da", "de", "ki", "yalnız", "mademki", "yahut", "hem", "ne"],
+  "_cakisan_kelimeler": {
+    "bu/şu/o": "işaret sıfatı (+isim) veya işaret zamiri (tek başına) veya (o için) kişi zamiri",
+    "ne": "soru zamiri / soru sıfatı (+isim) / soru zarfı (fiile yönelik) — MEB'in kendi örneği",
+    "bir": "niteleme sıfatı / belgisiz sıfat / sayı sıfatı — MEB'in kendi örneği",
+    "kimi": "belgisiz zamir / belgisiz sıfat (+isim)",
+    "ile": "edat (yerine 've' konabiliyorsa bağlaç, konmuyorsa edat) — MEB'in kendi kuralı",
+    "yalnız": "sıfat (+isim) / zarf (fiile yönelik) / bağlaç (iki cümle bağlıyorsa)",
+    "ancak": "zarf (sınırlama) / bağlaç (iki cümle bağlıyorsa)",
+    "-ki": "ilgi zamiri (isim tamlamasında tamlananın yerine) / sıfat türeten yapım eki / bağlaç (şüphe/pekiştirme)"
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "aciklama": [
+    "BitigAI'nin Zemberek sözlüğüne uyguladığı düzeltmeler.",
+    "Kaynak dosyalar (veri/zemberek/*.dict) asla değiştirilmez; buradaki kayıtlar",
+    "yükleme sırasında üstlerine uygulanır. Böylece upstream veri tazelendiğinde",
+    "düzeltmelerimiz kaybolmaz ve neyi neden değiştirdiğimiz görünür kalır.",
+    "",
+    "'ekle' satırları Zemberek satır grameriyle yazılır — tek ayrıştırıcı, tek kaynak.",
+    "'kaldir' kök biçimini alır ve o köke bağlı tüm girdileri düşürür.",
+    "'oznitelik_ekle' mevcut bir (kök, tür) girdisine öznitelik ekler, silmez.",
+    "Sıra: kaldir → ekle → oznitelik_ekle.",
+    "",
+    "Buraya bir kayıt eklemeden önce altın kümede onu gerektiren bir vaka olmalı.",
+    "Ölçüsüz düzeltme, v1'in gömülü listelerine geri dönüştür."
+  ],
+  "kaldir": [],
+  "ekle": [
+    "reklam"
+  ],
+  "oznitelik_ekle": [
+    {
+      "kok": "de",
+      "tur": "Verb",
+      "oznitelikler": ["KokDaralir"],
+      "gerekce": "de- fiili ünlüyle başlayan her ekten önce daralır: diyecek, diyen, diyerek, diyince. Zemberek yalnızca -Iyor öncesini (ProgressiveVowelDrop) işaretliyor; kalanı bu bayrak kapatıyor. Türkçe'de bu davranışı yalnızca de- ve ye- gösterir."
+    },
+    {
+      "kok": "ye",
+      "tur": "Verb",
+      "oznitelikler": ["KokDaralir"],
+      "gerekce": "ye- fiili için aynı düzensizlik: yiyecek, yiyen, yiyerek, yiyince."
+    },
+
+    {
+      "kok": "ge",
+      "tur": "Noun",
+      "oznitelikler": ["YapimAlmaz"],
+      "gerekce": "Arap alfabesindeki harf adı. Yapım eki alınca uydurma sözcükler doğuruyor: ge+lA → 'gele-' fiili → 'geliyor' sözcüğüne sahte ünlü daralması okuması ekliyordu. Çekim eki alabilir (ge'nin), yalnızca yapım eki yasak."
+    },
+    {"kok": "fe", "tur": "Noun", "oznitelikler": ["YapimAlmaz"], "gerekce": "harf adı"},
+    {"kok": "le", "tur": "Noun", "oznitelikler": ["YapimAlmaz"], "gerekce": "harf adı"},
+    {"kok": "pe", "tur": "Noun", "oznitelikler": ["YapimAlmaz"], "gerekce": "harf adı"},
+    {"kok": "re", "tur": "Noun", "oznitelikler": ["YapimAlmaz"], "gerekce": "harf adı"},
+    {"kok": "se", "tur": "Noun", "oznitelikler": ["YapimAlmaz"], "gerekce": "harf adı"},
+    {"kok": "şe", "tur": "Noun", "oznitelikler": ["YapimAlmaz"], "gerekce": "harf adı"},
+    {"kok": "te", "tur": "Noun", "oznitelikler": ["YapimAlmaz"], "gerekce": "harf adı"},
+
+    {
+      "kok": "ufak",
+      "tur": "Adj",
+      "oznitelikler": ["SonUnsuzDuser"],
+      "gerekce": "Küçültme eki (-CIk) geldiğinde son 'k' düşer: ufacık. OGM Materyal ses bilgisi kaynağında çıkmış soru: '-cik, -cek eki almış sözcüklerden hangisi ünsüz düşmesine örnek olarak gösterilemez?' — A) ufacık örnek gösteriliyor."
+    },
+    {
+      "kok": "küçük",
+      "tur": "Adj",
+      "oznitelikler": ["SonUnsuzDuser"],
+      "gerekce": "küçücük. Aynı kaynak, B seçeneği."
+    },
+    {
+      "kok": "büyük",
+      "tur": "Adj",
+      "oznitelikler": ["SonUnsuzDuser"],
+      "gerekce": "büyücek. Aynı kaynak, C seçeneği."
+    },
+    {
+      "kok": "alçak",
+      "tur": "Adj",
+      "oznitelikler": ["SonUnsuzDuser"],
+      "gerekce": "alçacık. Aynı kaynak, D seçeneği. E seçeneği 'yavrucak' karşı örnektir: 'yavru' zaten ünlüyle bitiyor, düşecek ünsüz yok — soru bu yüzden E'yi doğru cevap sayıyor (düşme örneği GÖSTERİLEMEZ)."
+    }
+  ]
+}

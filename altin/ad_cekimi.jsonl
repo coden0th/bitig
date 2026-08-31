@@ -1,0 +1,124 @@
+{"kelime": "kitabı", "kok": "kitap", "beklenen": ["SES.YUM.01"], "not": "p→b, belirtme hâli"}
+{"kelime": "kitaba", "kok": "kitap", "beklenen": ["SES.YUM.01"], "not": "p→b, yönelme hâli"}
+{"kelime": "ağacı", "kok": "ağaç", "beklenen": ["SES.YUM.01"], "not": "ç→c"}
+{"kelime": "ağaca", "kok": "ağaç", "beklenen": ["SES.YUM.01"], "not": "ç→c"}
+{"kelime": "kanadı", "kok": "kanat", "beklenen": ["SES.YUM.01"], "not": "t→d"}
+{"kelime": "çocuğu", "kok": "çocuk", "beklenen": ["SES.YUM.01"], "not": "k→ğ"}
+{"kelime": "sokağı", "kok": "sokak", "beklenen": ["SES.YUM.01"], "not": "k→ğ"}
+{"kelime": "dolabı", "kok": "dolap", "beklenen": ["SES.YUM.01"], "not": "p→b"}
+{"kelime": "kâğıdı", "kok": "kâğıt", "beklenen": ["SES.YUM.01"], "not": "şapkalı ünlü, kural aynı"}
+{"kelime": "yemeği", "kok": "yemek", "beklenen": ["SES.YUM.01"], "not": "isim okuması; fiil okuması ayrı"}
+{"kelime": "güdüğü", "kok": "güdük", "beklenen": ["SES.YUM.01"], "not": "v1 bunu ek almamış hâlde işaretliyordu"}
+{"kelime": "rengi", "kok": "renk", "beklenen": ["SES.YUM.01"], "not": "nk istisnası: k→g"}
+{"kelime": "ahengi", "kok": "ahenk", "beklenen": ["SES.YUM.01"], "not": "nk istisnası"}
+{"kelime": "kabı", "kok": "kap", "beklenen": ["SES.YUM.01"], "not": "tek heceli ama sözlükte açık Voicing"}
+{"kelime": "ucu", "kok": "uç", "beklenen": ["SES.YUM.01"], "not": "tek heceli ama sözlükte açık Voicing"}
+{"kelime": "kurdu", "kok": "kurt", "beklenen": ["SES.YUM.01"], "not": "tek heceli, açık Voicing"}
+{"kelime": "bardağı", "kok": "bardak", "beklenen": ["SES.YUM.01"], "not": "k→ğ"}
+{"kelime": "ayağı", "kok": "ayak", "beklenen": ["SES.YUM.01"], "not": "k→ğ"}
+{"kelime": "sepeti", "kok": "sepet", "beklenen": [], "not": "NEGATİF — NoVoicing, yumuşamaz"}
+{"kelime": "diyeti", "kok": "diyet", "beklenen": [], "not": "NEGATİF — NoVoicing"}
+{"kelime": "niyeti", "kok": "niyet", "beklenen": [], "not": "NEGATİF — NoVoicing"}
+{"kelime": "saati", "kok": "saat", "beklenen": [], "not": "NEGATİF — NoVoicing + InverseHarmony"}
+{"kelime": "devleti", "kok": "devlet", "beklenen": [], "not": "NEGATİF — NoVoicing"}
+{"kelime": "sanatı", "kok": "sanat", "beklenen": [], "not": "NEGATİF — NoVoicing"}
+{"kelime": "topu", "kok": "top", "beklenen": [], "not": "NEGATİF — tek heceli, yumuşamaz"}
+{"kelime": "sacı", "kok": "saç", "beklenen": [], "not": "NEGATİF — tek heceli"}
+{"kelime": "güdük", "kok": "güdük", "beklenen": [], "not": "NEGATİF — ek yok, kelime kökün kendisi (v1 hatası)"}
+{"kelime": "yudum", "kok": "yudum", "beklenen": [], "not": "NEGATİF — ek yok (v1 hatası)"}
+{"kelime": "kitap", "kok": "kitap", "beklenen": [], "not": "NEGATİF — çıplak kök, olay yok"}
+{"kelime": "hediye", "kok": "hediye", "beklenen": [], "not": "NEGATİF — v1 'diye' altdizisiyle daralma diyordu"}
+{"kelime": "diyet", "kok": "diyet", "beklenen": [], "not": "NEGATİF — v1 hatası"}
+{"kelime": "niyet", "kok": "niyet", "beklenen": [], "not": "NEGATİF — v1 hatası"}
+{"kelime": "çarşamba", "kok": "çarşamba", "beklenen": [], "not": "NEGATİF — morfolojik olay yok; v1 Kural 10 kategori hatasıydı"}
+{"kelime": "çarşambaya", "kok": "çarşamba", "beklenen": ["SES.KAY.01"], "not": "v1 çekimli hâli tamamen kaçırıyordu"}
+{"kelime": "burnu", "kok": "burun", "beklenen": ["SES.UD.01"], "not": "burun→burn"}
+{"kelime": "burna", "kok": "burun", "beklenen": ["SES.UD.01"], "not": "burun→burn"}
+{"kelime": "ağzı", "kok": "ağız", "beklenen": ["SES.UD.01"], "not": "ağız→ağz"}
+{"kelime": "ağza", "kok": "ağız", "beklenen": ["SES.UD.01"], "not": "ağız→ağz"}
+{"kelime": "gönlü", "kok": "gönül", "beklenen": ["SES.UD.01"], "not": "gönül→gönl"}
+{"kelime": "boynu", "kok": "boyun", "beklenen": ["SES.UD.01"], "not": "boyun→boyn"}
+{"kelime": "alnı", "kok": "alın", "beklenen": ["SES.UD.01"], "not": "alın→aln"}
+{"kelime": "karnı", "kok": "karın", "beklenen": ["SES.UD.01"], "not": "karın→karn"}
+{"kelime": "oğlu", "kok": "oğul", "beklenen": ["SES.UD.01"], "not": "oğul→oğl"}
+{"kelime": "şehri", "kok": "şehir", "beklenen": ["SES.UD.01"], "not": "şehir→şehr"}
+{"kelime": "hapsi", "kok": "hapis", "beklenen": ["SES.UD.01"], "not": "hapis→haps"}
+{"kelime": "fikri", "kok": "fikir", "beklenen": ["SES.UD.01"], "not": "fikir→fikr"}
+{"kelime": "zihni", "kok": "zihin", "beklenen": ["SES.UD.01"], "not": "zihin→zihn"}
+{"kelime": "ömrü", "kok": "ömür", "beklenen": ["SES.UD.01"], "not": "ömür→ömr"}
+{"kelime": "beyni", "kok": "beyin", "beklenen": ["SES.UD.01"], "not": "beyin→beyn"}
+{"kelime": "göğsü", "kok": "göğüs", "beklenen": ["SES.UD.01"], "not": "göğüs→göğs"}
+{"kelime": "burun", "kok": "burun", "beklenen": [], "not": "NEGATİF — ek yok"}
+{"kelime": "burunlar", "kok": "burun", "beklenen": [], "not": "NEGATİF — ek ünsüzle başlıyor, ünlü düşmez"}
+{"kelime": "ağızlar", "kok": "ağız", "beklenen": [], "not": "NEGATİF — ünsüzle başlayan ek"}
+{"kelime": "şehirler", "kok": "şehir", "beklenen": [], "not": "NEGATİF — ünsüzle başlayan ek"}
+{"kelime": "hakkı", "kok": "hak", "beklenen": ["SES.UT.01"], "not": "k→kk ikizleşme"}
+{"kelime": "hakka", "kok": "hak", "beklenen": ["SES.UT.01"], "not": "ikizleşme"}
+{"kelime": "affı", "kok": "af", "beklenen": ["SES.UT.01"], "not": "f→ff"}
+{"kelime": "hissi", "kok": "his", "beklenen": ["SES.UT.01"], "not": "s→ss"}
+{"kelime": "sırrı", "kok": "sır", "beklenen": ["SES.UT.01"], "not": "r→rr"}
+{"kelime": "zannı", "kok": "zan", "beklenen": ["SES.UT.01"], "not": "n→nn"}
+{"kelime": "haddi", "kok": "had", "beklenen": ["SES.UT.01"], "not": "d→dd"}
+{"kelime": "tıbbı", "kok": "tıp", "beklenen": ["SES.UT.01", "SES.YUM.01"], "not": "hem ikizleşme hem yumuşama: tıp→tıbb"}
+{"kelime": "hak", "kok": "hak", "beklenen": [], "not": "NEGATİF — ek yok"}
+{"kelime": "haklar", "kok": "hak", "beklenen": [], "not": "NEGATİF — ünsüzle başlayan ek"}
+{"kelime": "afta", "kok": "af", "beklenen": ["SES.BEN.01"], "not": "NEGATİF ikizleşme için; benzeşme var"}
+{"kelime": "kapısı", "kok": "kapı", "beklenen": ["SES.KAY.01"], "not": "s kaynaştırması. Kaynak: MEBİ TYT Konu Özetleri - Türkçe, Ses Bilgisi 2, s.38"}
+{"kelime": "masası", "kok": "masa", "beklenen": ["SES.KAY.01"], "not": "s kaynaştırması"}
+{"kelime": "arabası", "kok": "araba", "beklenen": ["SES.KAY.01"], "not": "s kaynaştırması"}
+{"kelime": "ütüsü", "kok": "ütü", "beklenen": ["SES.KAY.01"], "not": "s kaynaştırması"}
+{"kelime": "masaya", "kok": "masa", "beklenen": ["SES.KAY.01"], "not": "y kaynaştırması"}
+{"kelime": "kapıya", "kok": "kapı", "beklenen": ["SES.KAY.01"], "not": "y kaynaştırması"}
+{"kelime": "arabayı", "kok": "araba", "beklenen": ["SES.KAY.01"], "not": "y kaynaştırması"}
+{"kelime": "kapıyı", "kok": "kapı", "beklenen": ["SES.KAY.01"], "not": "y kaynaştırması"}
+{"kelime": "evi", "kok": "ev", "beklenen": [], "not": "NEGATİF — gövde ünsüzle bitiyor, kaynaştırma yok"}
+{"kelime": "eve", "kok": "ev", "beklenen": [], "not": "NEGATİF — kaynaştırma yok"}
+{"kelime": "gözü", "kok": "göz", "beklenen": [], "not": "NEGATİF — olay yok"}
+{"kelime": "yolu", "kok": "yol", "beklenen": [], "not": "NEGATİF — olay yok"}
+{"kelime": "kitapta", "kok": "kitap", "beklenen": ["SES.BEN.01"], "not": "d→t; yumuşama YOK (ek ünsüzle başlıyor)"}
+{"kelime": "kitaptan", "kok": "kitap", "beklenen": ["SES.BEN.01"], "not": "d→t"}
+{"kelime": "ağaçta", "kok": "ağaç", "beklenen": ["SES.BEN.01"], "not": "d→t"}
+{"kelime": "ağaçtan", "kok": "ağaç", "beklenen": ["SES.BEN.01"], "not": "d→t"}
+{"kelime": "çiçekten", "kok": "çiçek", "beklenen": ["SES.BEN.01"], "not": "d→t"}
+{"kelime": "sokakta", "kok": "sokak", "beklenen": ["SES.BEN.01"], "not": "d→t"}
+{"kelime": "sepette", "kok": "sepet", "beklenen": ["SES.BEN.01"], "not": "benzeşme var, yumuşama yok"}
+{"kelime": "saatte", "kok": "saat", "beklenen": ["SES.BEN.01"], "not": "benzeşme var, yumuşama yok"}
+{"kelime": "evde", "kok": "ev", "beklenen": [], "not": "NEGATİF — gövde ötümlü, sertleşme yok"}
+{"kelime": "evden", "kok": "ev", "beklenen": [], "not": "NEGATİF"}
+{"kelime": "masada", "kok": "masa", "beklenen": [], "belirsiz_kabul": ["SES.YUM.01"], "not": "NEGATİF — asıl okuma masa+da. Ama 'masat' (bileği çeliği) da sözlükte: masat+a → yumuşama. Gerçek belirsizlik, bağlamsız çözülemez."}
+{"kelime": "yolda", "kok": "yol", "beklenen": [], "not": "NEGATİF"}
+{"kelime": "gözde", "kok": "göz", "beklenen": [], "not": "NEGATİF"}
+{"kelime": "kitaplar", "kok": "kitap", "beklenen": [], "not": "NEGATİF — çoğul eki ünsüzle başlıyor"}
+{"kelime": "ağaçlar", "kok": "ağaç", "beklenen": [], "not": "NEGATİF"}
+{"kelime": "kitaplarda", "kok": "kitap", "beklenen": [], "not": "NEGATİF — l ötümlü, sertleşme yok"}
+{"kelime": "kitabım", "kok": "kitap", "beklenen": ["SES.YUM.01"], "not": "1. tekil iyelik"}
+{"kelime": "kitabın", "kok": "kitap", "beklenen": ["SES.YUM.01"], "not": "2. tekil iyelik veya ilgi hâli"}
+{"kelime": "ağacımız", "kok": "ağaç", "beklenen": ["SES.YUM.01"], "not": "1. çoğul iyelik"}
+{"kelime": "burnum", "kok": "burun", "beklenen": ["SES.UD.01"], "not": "iyelik + ünlü düşmesi"}
+{"kelime": "ağzım", "kok": "ağız", "beklenen": ["SES.UD.01"], "not": "iyelik + ünlü düşmesi"}
+{"kelime": "hakkım", "kok": "hak", "beklenen": ["SES.UT.01"], "not": "iyelik + ikizleşme"}
+{"kelime": "kitaplarım", "kok": "kitap", "beklenen": [], "not": "NEGATİF — çoğul araya girdi, yumuşama koşulu bozuldu"}
+{"kelime": "ağaçlarım", "kok": "ağaç", "beklenen": [], "not": "NEGATİF"}
+{"kelime": "burunlarım", "kok": "burun", "beklenen": [], "not": "NEGATİF — çoğul araya girdi"}
+{"kelime": "ufacık", "kok": "ufak", "beklenen": ["SES.UND.01"], "not": "k düşer; küçültme eki -cık. Kaynak: OGM Materyal ses bilgisi, çıkmış soru"}
+{"kelime": "küçücük", "kok": "küçük", "beklenen": ["SES.UND.01"], "not": "k düşer; aynı kaynak"}
+{"kelime": "alçacık", "kok": "alçak", "beklenen": ["SES.UND.01"], "not": "k düşer; aynı kaynak"}
+{"kelime": "ufacığa", "kok": "ufak", "beklenen": ["SES.UND.01", "SES.YUM.01"], "not": "k düşer, sonra -CIk'in kendi k'si yumuşar (Voicing eki üstünde)"}
+{"kelime": "yavrucak", "kok": "yavru", "beklenen": [], "not": "NEGATİF — 'yavru' zaten ünlüyle bitiyor, düşecek ünsüz yok. OGM sorusunun doğru cevabı tam bu yüzden bu seçenek"}
+{"kelime": "kitapçık", "kok": "kitap", "beklenen": ["SES.BEN.01"], "not": "SES.UND.01 için NEGATİF ('kitap' SonUnsuzDuser taşımıyor, k düşmez) ama -CIk'in kendi C'si kitap'ın ötümsüz p'si karşısında sertleşir (ç) — bu ayrı, gerçek bir SES.BEN.01"}
+{"kelime": "ufaktan", "kok": "ufak", "beklenen": ["SES.BEN.01"], "not": "SES.UND.01 için NEGATİF (ek küçültme eki değil, dusurur_unsuz tetiklenmez) ama -dan'ın d'si ufak'ın ötümsüz k'si karşısında sertleşir (t) — ayrı, gerçek bir SES.BEN.01"}
+{"kelime": "sarkaca", "kok": "sarkaç", "beklenen": ["SES.YUM.01"], "not": "ç→c, yönelme hâli. Kaynak: MEBİ TYT Konu Özetleri - Türkçe, Ses Bilgisi 2, s.38"}
+{"kelime": "derdi", "kok": "dert", "beklenen": ["SES.YUM.01"], "not": "t→d, belirtme hâli. Kaynak: MEBİ TYT Konu Özetleri - Türkçe, Ses Bilgisi 2, s.38"}
+{"kelime": "kalbim", "kok": "kalp", "beklenen": ["SES.YUM.01"], "not": "p→b, iyelik-1 tekil. Kaynak: MEBİ TYT Konu Özetleri - Türkçe, Ses Bilgisi 2, s.38"}
+{"kelime": "sırrımız", "kok": "sır", "beklenen": ["SES.UT.01"], "not": "r türemesi, iyelik-1 çoğul. Kaynak: MEBİ TYT Konu Özetleri - Türkçe, Ses Bilgisi 2, s.38"}
+{"kelime": "kimseye", "kok": "kimse", "beklenen": ["SES.KAY.01"], "not": "y kaynaştırma, yönelme hâli. Kaynak: MEBİ TYT Konu Özetleri - Türkçe, Ses Bilgisi 2, s.38"}
+{"kelime": "pencerenin", "kok": "pencere", "beklenen": ["SES.KAY.01"], "not": "n kaynaştırma, ilgi hâli. Kaynak: MEBİ TYT Konu Özetleri - Türkçe, Ses Bilgisi 2, s.38"}
+{"kelime": "bileği", "kok": "bilek", "beklenen": ["SES.YUM.01"], "not": "k→ğ, belirtme hâli. Kaynak: OGM Materyal, Noktalama İşaretleri ve Ses Bilgisi, s.49"}
+{"kelime": "sınıfta", "kok": "sınıf", "beklenen": ["SES.BEN.01"], "not": "d→t sertleşme, bulunma hâli. Kaynak: OGM Materyal, Noktalama İşaretleri ve Ses Bilgisi, s.51"}
+{"kelime": "aklı", "kok": "akıl", "beklenen": ["SES.UD.01"], "not": "ünlü düşmesi, belirtme hâli. Kaynak: OGM Materyal, Noktalama İşaretleri ve Ses Bilgisi, s.52"}
+{"kelime": "benzi", "kok": "beniz", "beklenen": ["SES.UD.01"], "not": "ünlü düşmesi, iyelik-3 tekil. Kaynak: OGM Materyal, Noktalama İşaretleri ve Ses Bilgisi, s.52"}
+{"kelime": "şıkkı", "kok": "şık", "beklenen": ["SES.UT.01"], "not": "k ikizleşmesi, belirtme hâli. Kaynak: OGM Materyal, Noktalama İşaretleri ve Ses Bilgisi, s.57"}
+{"kelime": "reddi", "kok": "ret", "beklenen": ["SES.UT.01", "SES.YUM.01"], "not": "t ikizleşmesi + yumuşama (t→d), belirtme hâli. Kaynak: OGM Materyal, Noktalama İşaretleri ve Ses Bilgisi, s.57"}
+{"kelime": "arabaya", "kok": "araba", "beklenen": ["SES.KAY.01"], "not": "y kaynaştırma, yönelme hâli. Kaynak: OGM Materyal, Noktalama İşaretleri ve Ses Bilgisi, s.63"}
+{"kelime": "ikisi", "kok": "iki", "beklenen": ["SES.KAY.01"], "not": "s kaynaştırma, iyelik-3 tekil. Kaynak: OGM Materyal, Noktalama İşaretleri ve Ses Bilgisi, s.63"}
+{"kelime": "elbisesi", "kok": "elbise", "beklenen": ["SES.KAY.01"], "not": "s kaynaştırma, iyelik-3 tekil. Kaynak: OGM Materyal, Noktalama İşaretleri ve Ses Bilgisi, s.63"}

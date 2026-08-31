@@ -1,0 +1,83 @@
+{"kelime": "başlıyor", "kok": "başla", "beklenen": ["SES.DAR.01"], "not": "a→ı"}
+{"kelime": "bekliyor", "kok": "bekle", "beklenen": ["SES.DAR.01"], "not": "e→i"}
+{"kelime": "söylüyor", "kok": "söyle", "beklenen": ["SES.DAR.01"], "not": "uyum daralmış gövdeye göre: söyl→ü, söyliyor değil"}
+{"kelime": "özlüyor", "kok": "özle", "beklenen": ["SES.DAR.01"], "not": "aynı incelik"}
+{"kelime": "arıyor", "kok": "ara", "beklenen": ["SES.DAR.01"], "not": "a→ı"}
+{"kelime": "okuyor", "kok": "oku", "beklenen": [], "not": "NEGATİF — u zaten dar, daralacak bir şey yok. ÖSYM çıkmış sorusunda (EBA) daralmanın OLMADIĞI seçenek olarak sorulmuş. Yapısal olarak ünlü düşer ama olay bildirilmez."}
+{"kelime": "yürüyor", "kok": "yürü", "beklenen": [], "not": "NEGATİF — ü zaten dar, okuyor ile aynı gerekçe"}
+{"kelime": "diyor", "kok": "de", "beklenen": ["SES.DAR.01"], "not": "e→i; gövdede ünlü kalmaz, uyum özgün kökten"}
+{"kelime": "yiyor", "kok": "ye", "beklenen": ["SES.DAR.01"], "not": "aynı"}
+{"kelime": "gelmiyor", "kok": "gel", "beklenen": ["SES.DAR.01"], "not": "daralma -mA ekinde: gelme→gelm"}
+{"kelime": "gitmiyorum", "kok": "git", "beklenen": ["SES.DAR.01"], "not": "-mA daralır; git yumuşamaz çünkü -mA ünsüzle başlar"}
+{"kelime": "istiyor", "kok": "iste", "beklenen": ["SES.DAR.01"], "not": "e→i"}
+{"kelime": "anlıyor", "kok": "anla", "beklenen": ["SES.DAR.01"], "not": "a→ı"}
+{"kelime": "diyecek", "kok": "de", "beklenen": ["SES.DAR.01", "SES.KAY.01"], "not": "de- düzensizliği: -Iyor dışında da daralır"}
+{"kelime": "yiyecek", "kok": "ye", "beklenen": ["SES.DAR.01", "SES.KAY.01"], "not": "aynı düzensizlik"}
+{"kelime": "diyen", "kok": "de", "beklenen": ["SES.DAR.01", "SES.KAY.01"], "not": "sıfat-fiil"}
+{"kelime": "yiyerek", "kok": "ye", "beklenen": ["SES.DAR.01", "SES.KAY.01"], "not": "zarf-fiil"}
+{"kelime": "geliyor", "kok": "gel", "beklenen": [], "not": "NEGATİF — 'i' yardımcı ünlü, daralma değil. v1 Kural 9 bunu elle ayırmaya çalışıyordu"}
+{"kelime": "yazıyor", "kok": "yaz", "beklenen": [], "not": "NEGATİF — yardımcı ünlü"}
+{"kelime": "görüyor", "kok": "gör", "beklenen": [], "not": "NEGATİF — yardımcı ünlü"}
+{"kelime": "biliyor", "kok": "bil", "beklenen": [], "belirsiz_kabul": ["SES.DAR.01"], "not": "NEGATİF (bil-iyor) — yardımcı ünlü. Ama 'bilemek' (bileylemek) fiili de var: bile+iyor daralma verir. Gerçek belirsizlik: 'bıçağı biliyor'"}
+{"kelime": "yedim", "kok": "ye", "beklenen": [], "not": "NEGATİF — ek ünsüzle başlıyor, daralma yok"}
+{"kelime": "dedim", "kok": "de", "beklenen": [], "not": "NEGATİF"}
+{"kelime": "demiş", "kok": "de", "beklenen": [], "not": "NEGATİF"}
+{"kelime": "yemeli", "kok": "ye", "beklenen": [], "not": "NEGATİF"}
+{"kelime": "hediye", "kok": "hediye", "beklenen": [], "not": "NEGATİF — isim. v1'in en kötü hatası: 'diye' altdizisi"}
+{"kelime": "diyet", "kok": "diyet", "beklenen": [], "not": "NEGATİF — v1 hatası"}
+{"kelime": "niyet", "kok": "niyet", "beklenen": [], "not": "NEGATİF — v1 hatası"}
+{"kelime": "sandalye", "kok": "sandalye", "beklenen": [], "not": "NEGATİF"}
+{"kelime": "gidiyor", "kok": "git", "beklenen": ["SES.YUM.01"], "not": "t→d, fiilde yumuşama"}
+{"kelime": "gidecek", "kok": "git", "beklenen": ["SES.YUM.01"], "not": "t→d"}
+{"kelime": "ediyor", "kok": "et", "beklenen": ["SES.YUM.01"], "not": "t→d"}
+{"kelime": "tadıyor", "kok": "tat", "beklenen": ["SES.YUM.01"], "not": "t→d"}
+{"kelime": "güdüyor", "kok": "güt", "beklenen": ["SES.YUM.01"], "not": "t→d. v1'in 'güd' listesi bunu arıyordu"}
+{"kelime": "gideriz", "kok": "git", "beklenen": ["SES.YUM.01"], "not": "geniş zaman"}
+{"kelime": "gördüğüm", "kok": "gör", "beklenen": ["SES.YUM.01"], "not": "yumuşama EKTE: -DIk → -dük+üm"}
+{"kelime": "geleceğim", "kok": "gel", "beklenen": ["SES.YUM.01"], "not": "yumuşama EKTE: -AcAk → -eceğ+im"}
+{"kelime": "yapacağız", "kok": "yap", "beklenen": ["SES.YUM.01"], "not": "ekte yumuşama"}
+{"kelime": "atıyor", "kok": "at", "beklenen": [], "belirsiz_kabul": ["SES.DAR.01"], "not": "NEGATİF — at- yumuşamaz. Ama 'ata-' fiili de var: ata+ıyor daralma verir, gerçek belirsizlik"}
+{"kelime": "satıyor", "kok": "sat", "beklenen": [], "not": "NEGATİF — sat- yumuşamaz"}
+{"kelime": "tutuyor", "kok": "tut", "beklenen": [], "not": "NEGATİF — tut- yumuşamaz"}
+{"kelime": "gitti", "kok": "git", "beklenen": ["SES.BEN.01"], "not": "d→t benzeşme; yumuşama YOK çünkü ek ünsüzle başlıyor"}
+{"kelime": "geçti", "kok": "geç", "beklenen": ["SES.BEN.01"], "not": "d→t"}
+{"kelime": "açtı", "kok": "aç", "beklenen": ["SES.BEN.01"], "not": "d→t"}
+{"kelime": "kestik", "kok": "kes", "beklenen": ["SES.BEN.01"], "not": "d→t"}
+{"kelime": "çıktı", "kok": "çık", "beklenen": ["SES.BEN.01"], "not": "d→t"}
+{"kelime": "baktım", "kok": "bak", "beklenen": ["SES.BEN.01"], "not": "d→t"}
+{"kelime": "gelecekti", "kok": "gel", "beklenen": ["SES.BEN.01"], "not": "birleşik kip; -AcAk sonrası d→t"}
+{"kelime": "geldi", "kok": "gel", "beklenen": [], "not": "NEGATİF — l ötümlü, sertleşme yok"}
+{"kelime": "yazdı", "kok": "yaz", "beklenen": [], "not": "NEGATİF — z ötümlü"}
+{"kelime": "buldum", "kok": "bul", "beklenen": [], "not": "NEGATİF"}
+{"kelime": "gördü", "kok": "gör", "beklenen": [], "not": "NEGATİF"}
+{"kelime": "kavruldu", "kok": "kavur", "beklenen": ["SES.UD.01"], "not": "kavur→kavr, edilgen"}
+{"kelime": "ayrıldı", "kok": "ayır", "beklenen": ["SES.UD.01"], "not": "ayır→ayr"}
+{"kelime": "çevrildi", "kok": "çevir", "beklenen": ["SES.UD.01"], "not": "çevir→çevr"}
+{"kelime": "savruldu", "kok": "savur", "beklenen": ["SES.UD.01"], "not": "savur→savr"}
+{"kelime": "kavurdu", "kok": "kavur", "beklenen": [], "not": "NEGATİF — ek ünsüzle başlıyor, ünlü düşmez"}
+{"kelime": "ayırdı", "kok": "ayır", "beklenen": [], "belirsiz_kabul": ["SES.YUM.01"], "not": "NEGATİF (ayır-dı) — ek ünsüzle başlıyor. Ama 'ayırt' ismi de var: ayırt+ı yumuşama verir. Gerçek belirsizlik"}
+{"kelime": "başlayınca", "kok": "başla", "beklenen": ["SES.KAY.01"], "not": "y kaynaştırması; daralma YOK (-IncA daraltmaz)"}
+{"kelime": "söyleyerek", "kok": "söyle", "beklenen": ["SES.KAY.01"], "not": "y kaynaştırması"}
+{"kelime": "arayacak", "kok": "ara", "beklenen": ["SES.KAY.01"], "not": "y kaynaştırması, daralma yok"}
+{"kelime": "okuyarak", "kok": "oku", "beklenen": ["SES.KAY.01"], "not": "y kaynaştırması"}
+{"kelime": "bekleyen", "kok": "bekle", "beklenen": ["SES.KAY.01"], "not": "y kaynaştırması"}
+{"kelime": "yazmaya", "kok": "yazma", "beklenen": ["SES.KAY.01"], "not": "isim-fiil + yönelme"}
+{"kelime": "gelerek", "kok": "gel", "beklenen": [], "not": "NEGATİF — ünsüzle bitiyor, kaynaştırma yok"}
+{"kelime": "gelince", "kok": "gel", "beklenen": [], "not": "NEGATİF"}
+{"kelime": "gelen", "kok": "gel", "beklenen": [], "not": "NEGATİF"}
+{"kelime": "yazıldı", "kok": "yaz", "beklenen": [], "not": "NEGATİF — edilgen, olay yok"}
+{"kelime": "okunmuş", "kok": "oku", "beklenen": [], "not": "NEGATİF — edilgen -In ünlüden sonra yardımcı ünlü almaz"}
+{"kelime": "görüştük", "kok": "gör", "beklenen": ["SES.BEN.01"], "not": "işteş + d→t"}
+{"kelime": "yazdırdı", "kok": "yaz", "beklenen": [], "not": "NEGATİF — ettirgen, olay yok"}
+{"kelime": "geliyormuş", "kok": "gel", "beklenen": [], "not": "NEGATİF — rivayet birleşik kipi"}
+{"kelime": "gelirse", "kok": "gel", "beklenen": [], "not": "NEGATİF — şart birleşik kipi"}
+{"kelime": "gelmedi", "kok": "gel", "beklenen": [], "not": "NEGATİF — olumsuzluk"}
+{"kelime": "gelmeliyiz", "kok": "gel", "beklenen": ["SES.KAY.01"], "not": "gereklilik + kişi ekinde y kaynaştırması"}
+{"kelime": "geldim", "kok": "gel", "beklenen": [], "not": "NEGATİF"}
+{"kelime": "gelirim", "kok": "gel", "beklenen": [], "not": "NEGATİF — geniş zaman"}
+{"kelime": "atar", "kok": "at", "beklenen": [], "not": "NEGATİF — Aorist_A: at-ar"}
+{"kelime": "gelir", "kok": "gel", "beklenen": [], "not": "NEGATİF — Aorist_I: gel-ir"}
+{"kelime": "seçti", "kok": "seç", "beklenen": ["SES.BEN.01"], "not": "d→t sertleşme, görülen geçmiş zaman. Kaynak: MEBİ TYT Konu Özetleri - Türkçe, Ses Bilgisi 2, s.38"}
+{"kelime": "kesti", "kok": "kes", "beklenen": ["SES.BEN.01"], "not": "d→t sertleşme, görülen geçmiş zaman. Kaynak: OGM Materyal, Noktalama İşaretleri ve Ses Bilgisi, s.51"}
+{"kelime": "dinliyor", "kok": "dinle", "beklenen": ["SES.DAR.01"], "not": "e→i daralması, şimdiki zaman. Kaynak: OGM Materyal, Noktalama İşaretleri ve Ses Bilgisi, s.59"}
+{"kelime": "oynuyor", "kok": "oyna", "beklenen": ["SES.DAR.01"], "not": "a→u daralması, şimdiki zaman. Kaynak: OGM Materyal, Noktalama İşaretleri ve Ses Bilgisi, s.59"}

@@ -1,0 +1,60 @@
+# Beyaz liste. Varsayılan: HER ŞEY yoksayılır. Yalnızca aşağıda açıkça
+# `!` ile geri açılanlar commit'lenebilir — yeni bir dosya/klasör burada
+# adı geçmeden asla otomatik yayınlanmaz.
+#
+# Sıra kritik: bir dosyanın geri açılabilmesi için önce KENDİ YOLUNDAKİ
+# HER dizinin de geri açılmış olması gerekir (aksi hâlde git dizinin
+# içine hiç bakmaz, dosya seviyesindeki `!` kuralı hiç değerlendirilmez).
+# Bu yüzden en tepede `!*/` var — tüm dizinleri (her derinlikte) görünür
+# kılar; hangi dosyaların göründüğünü asıl belirleyen, ondan sonraki
+# dosya-seviyesi `!` kurallarıdır.
+#
+# Bir dosyayı yeniden yoksaymak (`!veri/*.json` gibi geniş bir kuralın
+# ardından üç dosyayı tekrar kapatmak) için o satır, geri açan kuraldan
+# SONRA gelmeli — git kuralları yukarıdan aşağı, son eşleşen kazanır.
+
+*
+!*/
+
+# --- Kök dizin ---
+!/*.md
+!/LICENSE
+!/NOTICE
+!/pyproject.toml
+!/.gitignore
+
+# Kök dizindeki motor modülleri (bitig/ dışındaki türetilmiş motorlar)
+!/hece.py
+!/atasozu.py
+!/noktalama.py
+!/isim_soylu.py
+!/yazim.py
+!/anlatim.py
+!/baglam.py
+
+# --- Çekirdek motor ---
+!bitig/**/*.py
+
+# --- Geliştirme/ölçüm araçları ve testler ---
+!harness/**/*.py
+!testler/**/*.py
+
+# --- Karar günlüğü ---
+!docs/**/*.md
+
+# --- Veri ---
+!veri/*.json
+!veri/zemberek/*.dict
+!veri/zemberek/LICENSE.zemberek
+
+# Yukarıdaki `veri/*.json` kuralına rağmen bu üçü YAYINLANMAZ: kurulumda
+# ayrı bir betikle (senkron/indirme) elde ediliyorlar, telifli ya da
+# üçüncü taraf kaynaklı. Sıra önemli — bu satırlar `!veri/*.json`'dan
+# SONRA gelmeli, yoksa geri açma kuralı bunları da kapsardı.
+veri/atasozu_deyim.json
+veri/mebi_konu_ozetleri.json
+veri/tdk_onbellek.json
+
+# --- Altın kümeler ---
+!altin/*.jsonl
+!altin/*.md
