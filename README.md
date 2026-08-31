@@ -96,15 +96,20 @@ The short version:
 |---|---|
 | Past exam questions, phonology | 12 correct, 2 ambiguous, **0 wrong** (of 14) |
 | Past exam questions, verbs | 8 / 8 |
-| Coverage on clean Turkish text | 97.66% |
-| Disagreements with `zeyrek` (independent analyzer) | 2 in 181 words, engine correct in both |
+| Coverage on clean Turkish text | 97.83%¹ |
+| Disagreements with `zeyrek` (independent analyzer) | 2 in 207 words, engine correct in both |
 | Round-trip integrity | 100% over 226,583 generations |
 | Unit tests | 502 |
 | Speed | ~2.5 ms/word, zero production dependencies |
 
-Read the caveats. Some of the gold sets are partly self-authored and are being progressively
-replaced with entries sourced from official curriculum material; the numbers that do not
-depend on those labels are marked as such in RESULTS.md.
+¹ This measure regenerates its own test corpus from a model on every run, so the figure moves
+by a decimal point or two between runs; it is not a fixed reference number.
+
+Read the caveats. Of the gold-set entries, 17 of 124 nominal-inflection entries and 4 of 83
+verbal-inflection entries currently carry a citation to official curriculum material; the rest
+were written during development and are being progressively replaced as sourced material
+becomes available. The numbers that do not depend on those labels are marked as such in
+RESULTS.md.
 
 ---
 
@@ -143,7 +148,7 @@ bitig/          the engine. pure stdlib, no network, no model calls
 veri/           data. affix graph, rule map, lexicon overrides, policy records
 harness/        measurement and development tooling. may use network
 testler/        unit tests
-altin/          gold sets
+altin/          gold sets; see altin/README.md for the source-text redaction policy
 docs/           design decisions and change log
 ```
 
@@ -161,8 +166,13 @@ are an unmodified upstream copy; corrections are applied at load time from
 setup time from its source. Run it once before using `atasozu.py`.
 
 **Curriculum text and past exam questions** used during development are not included in this
-repository. Gold sets reference questions by identifier, year, and the tested word rather than
-reproducing full passages.
+repository. Most gold-set records were reduced to an alphabetized word list instead of the
+original sentence or passage — the engine's checks run word by word, so this changes nothing
+about what is measured, only what is stored. A small number of records measure something about
+sentence structure itself (word adjacency, a window of a few words, punctuation position) and
+could not be reduced this way; those keep their full text and are marked with a
+`redakte_edilemez` field stating why. See [`altin/README.md`](altin/README.md) for the full
+account and the exact record list.
 
 ---
 
