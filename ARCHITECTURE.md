@@ -115,6 +115,10 @@ which view counts as authoritative, and the other is still visible, so the user 
 Adding a policy record requires citing a real past exam question. The source field is enforced
 by test.
 
+This is visible in the running demo, not just in the source. Try `Evin çevresi güzeldi.` in the
+Ana Çözümleyici tab at [bitig.coskun.tech](https://bitig.coskun.tech): both views show up side
+by side, with the citation behind the exam board's reading.
+
 ## 6. The core is deterministic; models live at the edge
 
 No code inside `bitig/` makes a model call or a network call. This is enforced by test, not by

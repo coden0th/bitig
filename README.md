@@ -13,7 +13,31 @@ pipelines and subword tokenizers do not model. Bitig exists because a language m
 explain *why* `kitabı` shows consonant voicing will pattern-match on the surface string and
 be confidently wrong. This engine derives the answer instead of guessing it.
 
-Live demo: [bitig.coskun.tech](https://bitig.coskun.tech)
+---
+
+## Demo
+
+[bitig.coskun.tech](https://bitig.coskun.tech) runs the actual engine, not a mockup — one tab
+per component:
+
+| Tab | What it does |
+|---|---|
+| Ana Çözümleyici | Breaks a sentence's words into root + affix chains, with evidence per event |
+| Anlatım Bozukluğu | Scans for five narrow, word-list-based usage-error patterns |
+| Yazım | Suggests a spelling fix from a missed sound rule; checks a word against a cached TDK lookup |
+| Noktalama | Flags a missing comma after a conditional suffix, or a misplaced apostrophe on a proper noun |
+| Atasözü / Deyim | Looks up a proverb or idiom in a 13,592-entry local dictionary |
+| İsim Soylu | Classifies closed-class words (pronoun, adjective, adverb, ...) from sentence position |
+| Hece / Ünlü Uyumu | Syllabifies a word and checks vowel harmony |
+| Bağlamsal Seçici | Picks the contextually right reading from the engine's closed candidate set |
+
+Seven of the eight tabs are exactly what's described in this document: local, deterministic,
+no network call. The eighth needs a model call to work, so it's disabled server-side in the
+public demo — the endpoint refuses the request without touching the network. The tab itself
+stays up: it explains the mechanism and walks through one frozen, real example instead of
+taking live input. Which parts of this project need a model and which don't is the
+architecture itself, not an implementation detail — seeing that split enforced in a running
+demo is better evidence than reading about it.
 
 ---
 
@@ -147,6 +171,9 @@ bitig/          the engine. pure stdlib, no network, no model calls
   sozluk/           lexicon loading and attribute inference
 veri/           data. affix graph, rule map, lexicon overrides, policy records
 harness/        measurement and development tooling. may use network
+web/            the live demo's frontend — a single static HTML page
+web_server.py   the demo's backend. stdlib http.server, wraps the engines above;
+                the one model-calling endpoint is disabled server-side
 testler/        unit tests
 altin/          gold sets; see altin/README.md for the source-text redaction policy
 docs/           design decisions and change log
