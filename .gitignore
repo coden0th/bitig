@@ -58,3 +58,7 @@ veri/tdk_onbellek.json
 # --- Altın kümeler ---
 !altin/*.jsonl
 !altin/*.md
+
+# --- Web demosu ---
+!/web_server.py
+!web/*.html

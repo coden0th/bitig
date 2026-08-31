@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bitig — Türkçe morfoloji motoru</title>
+<meta name="description" content="Türkçe kelimeleri kök ve eklerine ayıran, ses olaylarını kanıtıyla birlikte gösteren deterministik morfoloji motoru.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧬</text></svg>">
+<style>
+  :root {
+    --bg: #f7f7f8;
+    --bg-elev: #ffffff;
+    --bg-sunken: #eef0f3;
+    --border: #e2e4e9;
+    --border-strong: #cdd1d9;
+    --text: #16181d;
+    --text-dim: #62697a;
+    --text-faint: #8991a3;
+    --accent: #2f6fed;
+    --accent-ink: #ffffff;
+    --accent-soft: #eaf0fe;
+    --good: #1a8a5f;
+    --good-soft: #e4f6ee;
+    --bad: #d1483e;
+    --bad-soft: #fbeae8;
+    --warn: #b9790a;
+    --warn-soft: #fbf1de;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --radius: 12px;
+    --radius-sm: 8px;
+    --shadow: 0 1px 2px rgba(20,22,30,.04), 0 8px 24px -12px rgba(20,22,30,.10);
+    --shadow-sm: 0 1px 2px rgba(20,22,30,.06);
+    color-scheme: light;
+  }
+  :root[data-theme="dark"] {
+    --bg: #0d0e12;
+    --bg-elev: #16181f;
+    --bg-sunken: #101217;
+    --border: #262932;
+    --border-strong: #383c48;
+    --text: #eceef2;
+    --text-dim: #a2a9b8;
+    --text-faint: #6b7284;
+    --accent: #6c9bff;
+    --accent-ink: #08121f;
+    --accent-soft: #182642;
+    --good: #4fcf9a;
+    --good-soft: #123227;
+    --bad: #ff8177;
+    --bad-soft: #3a1917;
+    --warn: #f0b74e;
+    --warn-soft: #35280e;
+    --shadow: 0 1px 2px rgba(0,0,0,.2), 0 8px 30px -12px rgba(0,0,0,.5);
+    --shadow-sm: 0 1px 2px rgba(0,0,0,.3);
+    color-scheme: dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0d0e12;
+      --bg-elev: #16181f;
+      --bg-sunken: #101217;
+      --border: #262932;
+      --border-strong: #383c48;
+      --text: #eceef2;
+      --text-dim: #a2a9b8;
+      --text-faint: #6b7284;
+      --accent: #6c9bff;
+      --accent-ink: #08121f;
+      --accent-soft: #182642;
+      --good: #4fcf9a;
+      --good-soft: #123227;
+      --bad: #ff8177;
+      --bad-soft: #3a1917;
+      --warn: #f0b74e;
+      --warn-soft: #35280e;
+      --shadow: 0 1px 2px rgba(0,0,0,.2), 0 8px 30px -12px rgba(0,0,0,.5);
+      --shadow-sm: 0 1px 2px rgba(0,0,0,.3);
+      color-scheme: dark;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--accent-soft); }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ---------- Top bar ---------- */
+  .topbar {
+    position: sticky; top: 0; z-index: 40;
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 24px;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px) saturate(1.4);
+    -webkit-backdrop-filter: blur(10px) saturate(1.4);
+    border-bottom: 1px solid var(--border);
+  }
+  .brand { display: flex; align-items: baseline; gap: 9px; margin-right: auto; }
+  .brand .mark {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 26px; height: 26px; border-radius: 7px;
+    background: var(--accent); color: var(--accent-ink);
+    font-size: 14px; font-weight: 800; font-family: var(--mono);
+    flex: none;
+  }
+  .brand .name { font-size: 16px; font-weight: 700; letter-spacing: -.01em; }
+  .brand .tag { font-size: 12.5px; color: var(--text-faint); display: none; }
+  @media (min-width: 640px) { .brand .tag { display: inline; } }
+
+  .icon-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 34px; height: 34px; border-radius: 9px;
+    background: transparent; border: 1px solid var(--border);
+    color: var(--text-dim); cursor: pointer; font-size: 15px;
+    transition: background .12s ease, color .12s ease, border-color .12s ease;
+  }
+  .icon-btn:hover { background: var(--bg-sunken); color: var(--text); border-color: var(--border-strong); }
+
+  .gh-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 13px; color: var(--text-dim); font-weight: 500;
+    padding: 7px 12px; border-radius: 9px; border: 1px solid var(--border);
+    transition: background .12s ease, color .12s ease;
+  }
+  .gh-link:hover { background: var(--bg-sunken); color: var(--text); text-decoration: none; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    max-width: 880px; margin: 0 auto; padding: 44px 24px 8px;
+  }
+  .hero h1 { font-size: 27px; margin: 0 0 10px; letter-spacing: -.02em; font-weight: 750; }
+  .hero p { margin: 0; color: var(--text-dim); font-size: 15px; max-width: 62ch; }
+  .hero .pill-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+  .en-strip {
+    max-width: 880px; margin: 0 auto; padding: 12px 24px 0;
+    font-size: 13px; color: var(--text-dim); line-height: 1.55;
+  }
+  .en-strip a { font-weight: 600; }
+  .model-note {
+    display: flex; gap: 9px; align-items: flex-start;
+    margin-top: 14px; padding: 11px 14px;
+    background: var(--bg-sunken); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); font-size: 13px; color: var(--text-dim); line-height: 1.55;
+  }
+  .model-note b { color: var(--text); }
+  .static-example {
+    background: var(--bg-sunken); border: 1px dashed var(--border-strong);
+    border-radius: var(--radius); padding: 16px 18px;
+  }
+  .static-example .tag-frozen {
+    display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .03em;
+    text-transform: uppercase; color: var(--text-faint); margin-bottom: 10px;
+  }
+  .pill {
+    font-size: 12px; font-weight: 600; padding: 5px 11px; border-radius: 100px;
+    background: var(--bg-elev); border: 1px solid var(--border); color: var(--text-dim);
+  }
+
+  /* ---------- Layout ---------- */
+  .shell { max-width: 880px; margin: 0 auto; padding: 28px 24px 90px; }
+
+  .tabs {
+    display: flex; gap: 6px; flex-wrap: wrap;
+    padding: 5px; margin-bottom: 22px;
+    background: var(--bg-elev); border: 1px solid var(--border);
+    border-radius: 13px; box-shadow: var(--shadow-sm);
+  }
+  .tab-btn {
+    background: none; border: none; color: var(--text-dim);
+    padding: 9px 14px; font-size: 13px; font-weight: 600;
+    border-radius: 9px; cursor: pointer; font-family: inherit;
+    transition: background .12s ease, color .12s ease;
+    white-space: nowrap;
+  }
+  .tab-btn:hover { color: var(--text); background: var(--bg-sunken); }
+  .tab-btn.active { color: var(--accent-ink); background: var(--accent); }
+
+  .panel { display: none; animation: fade .18s ease; }
+  .panel.active { display: block; }
+  @keyframes fade { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: none; } }
+
+  .panel-head { margin-bottom: 16px; }
+  .panel-head h2 { margin: 0 0 4px; font-size: 17px; font-weight: 700; letter-spacing: -.01em; }
+  .panel-head p { margin: 0; font-size: 13.5px; color: var(--text-dim); }
+
+  .field-card {
+    background: var(--bg-elev); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow-sm);
+  }
+  label.field-label { display: block; font-size: 12.5px; font-weight: 600; color: var(--text-dim); margin-bottom: 7px; }
+
+  textarea, input[type=text] {
+    width: 100%;
+    background: var(--bg-sunken);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    padding: 11px 13px;
+    font-size: 14.5px;
+    font-family: inherit;
+    resize: vertical;
+    transition: border-color .12s ease, box-shadow .12s ease;
+  }
+  textarea::placeholder, input::placeholder { color: var(--text-faint); }
+  textarea:focus, input[type=text]:focus {
+    outline: none; border-color: var(--accent); background: var(--bg-elev);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+
+  .examples { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 10px; }
+  .example-chip {
+    font-size: 12px; padding: 5px 10px; border-radius: 100px;
+    background: var(--bg-sunken); border: 1px solid var(--border);
+    color: var(--text-dim); cursor: pointer; font-family: var(--mono);
+    transition: background .12s ease, border-color .12s ease, color .12s ease;
+  }
+  .example-chip:hover { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+
+  .field-foot { display: flex; align-items: center; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
+  .radio-row { display: flex; gap: 16px; align-items: center; font-size: 13px; color: var(--text-dim); }
+  .radio-row label { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
+
+  button.run {
+    background: var(--accent); color: var(--accent-ink);
+    border: none; padding: 10px 18px; border-radius: var(--radius-sm);
+    font-size: 13.5px; font-weight: 650; font-family: inherit; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: filter .12s ease, transform .05s ease;
+  }
+  button.run:hover { filter: brightness(1.08); }
+  button.run:active { transform: translateY(1px); }
+  button.run:disabled { opacity: .6; cursor: default; filter: none; }
+  .kbd-hint { font-size: 11.5px; color: var(--text-faint); margin-left: auto; }
+  kbd {
+    font-family: var(--mono); font-size: 10.5px; background: var(--bg-sunken);
+    border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 4px;
+    padding: 1.5px 5px;
+  }
+
+  .spinner {
+    width: 13px; height: 13px; border-radius: 50%;
+    border: 2px solid rgba(255,255,255,.35); border-top-color: currentColor;
+    animation: spin .7s linear infinite; flex: none;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .warn-box {
+    display: flex; gap: 10px; align-items: flex-start;
+    background: var(--warn-soft); border: 1px solid color-mix(in srgb, var(--warn) 40%, transparent);
+    color: var(--warn); padding: 11px 14px; border-radius: var(--radius-sm);
+    font-size: 13px; margin-bottom: 14px; line-height: 1.5;
+  }
+  .warn-box b { color: inherit; }
+
+  /* ---------- Results ---------- */
+  .result { margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
+  .empty {
+    color: var(--text-faint); font-size: 13.5px; padding: 22px 0; text-align: center;
+  }
+  .card {
+    background: var(--bg-elev); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 16px 18px; box-shadow: var(--shadow-sm);
+  }
+  .card h3 {
+    margin: 0 0 10px; font-size: 15px; font-weight: 700;
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    font-family: var(--mono);
+  }
+  .badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 11px; padding: 3px 9px; border-radius: 100px;
+    font-weight: 650; font-family: var(--sans); letter-spacing: .01em;
+    border: 1px solid transparent;
+  }
+  .badge.good { background: var(--good-soft); color: var(--good); }
+  .badge.bad { background: var(--bad-soft); color: var(--bad); }
+  .badge.warn { background: var(--warn-soft); color: var(--warn); }
+  .badge.dim { background: var(--bg-sunken); color: var(--text-dim); border-color: var(--border); }
+
+  .okuma {
+    background: var(--bg-sunken); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 12px 14px; margin-top: 9px; font-size: 13px;
+  }
+  .okuma:first-of-type { margin-top: 4px; }
+  .okuma .baslik { font-family: var(--mono); color: var(--accent); font-weight: 600; font-size: 13.5px; }
+  .okuma .ekler { color: var(--text-dim); margin-top: 5px; font-size: 12.5px; }
+  .olay {
+    margin-top: 8px; padding: 8px 11px;
+    background: var(--accent-soft); border-radius: 7px;
+    font-size: 12.5px; color: var(--text-dim); line-height: 1.5;
+  }
+  .olay b { color: var(--text); font-family: var(--mono); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--text-faint); font-weight: 650; font-size: 11.5px; text-transform: uppercase; letter-spacing: .04em; }
+  tr:last-child td { border-bottom: none; }
+  td.mono, span.mono { font-family: var(--mono); }
+
+  .hint { font-size: 12.5px; color: var(--text-faint); margin-top: 4px; }
+  .divider-label {
+    font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
+    color: var(--text-faint); margin: 2px 0 -2px;
+  }
+
+  .raw-toggle {
+    font-size: 12px; color: var(--text-faint); cursor: pointer;
+    display: inline-flex; align-items: center; gap: 5px; margin-top: 2px;
+    padding: 4px 0; user-select: none;
+  }
+  .raw-toggle:hover { color: var(--text-dim); }
+  .raw-toggle .chev { transition: transform .15s ease; font-size: 9px; }
+  .raw-toggle.open .chev { transform: rotate(90deg); }
+  pre.raw {
+    display: none; background: var(--bg-sunken); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 13px; font-size: 11.5px;
+    overflow-x: auto; margin-top: 8px; font-family: var(--mono); color: var(--text-dim);
+  }
+  pre.raw.show { display: block; }
+
+  footer {
+    max-width: 880px; margin: 0 auto; padding: 26px 24px 50px;
+    display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    font-size: 12.5px; color: var(--text-faint); border-top: 1px solid var(--border);
+  }
+  footer a { color: var(--text-dim); }
+
+  @media (max-width: 560px) {
+    .hero { padding: 30px 18px 4px; }
+    .hero h1 { font-size: 23px; }
+    .shell { padding: 22px 18px 70px; }
+    .tabs { overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; }
+    .kbd-hint { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <span class="mark">Bt</span>
+    <span class="name">Bitig</span>
+    <span class="tag">Türkçe morfoloji motoru</span>
+  </div>
+  <a class="gh-link" href="https://github.com/coden0th/bitig" target="_blank" rel="noopener">
+    GitHub ↗
+  </a>
+  <button class="icon-btn" id="theme-toggle" title="Açık/koyu tema" aria-label="Temayı değiştir">◐</button>
+</div>
+
+<div class="en-strip">
+  Bitig is a deterministic Turkish morphological engine — it derives word structure from
+  root and affix rules instead of pattern-matching the surface form.
+  <a href="https://github.com/coden0th/bitig" target="_blank" rel="noopener">Source and docs on GitHub ↗</a>
+</div>
+
+<div class="hero">
+  <h1>Kelimeyi tahmin etmez, kökten türetir.</h1>
+  <p>
+    Bitig, Türkçe bir kelimeyi kök ve ek zincirine ayırır; yumuşama, ünlü düşmesi gibi ses
+    olaylarını yüzeye bakarak <em>tahmin etmez</em> — kökten ileri doğru türetip hedefle
+    karşılaştırır. Her olay, nerede ve hangi ekin tetiklediğiyle birlikte kanıtlanır.
+  </p>
+  <div class="pill-row">
+    <span class="pill">sıfır üretim bağımlılığı</span>
+    <span class="pill">7 ses kuralı</span>
+    <span class="pill">deterministik</span>
+    <span class="pill">Apache 2.0</span>
+  </div>
+  <div class="model-note">
+    <span>ℹ</span>
+    <span><b>Sekiz sekmenin yedisi tamamen yerel ve deterministiktir</b> — ağa hiç çıkmaz,
+    çekirdek motor sıfır bağımlılıkla çalışır. Yalnızca <b>Bağlamsal Seçici</b> bir dil
+    modeli kullanır; bu isteğe bağlı kenar katman, public demoda kapalıdır.</span>
+  </div>
+</div>
+
+<div class="shell">
+  <div class="tabs" id="tabs" role="tablist"></div>
+  <div id="panels"></div>
+</div>
+
+<footer>
+  <span>Bitig — <a href="https://github.com/coden0th/bitig/blob/main/LICENSE" target="_blank" rel="noopener">Apache License 2.0</a>. Zemberek sözlük verisi kendi lisansıyla birlikte gelir. © Emir Coşkun</span>
+  <span><a href="https://github.com/coden0th/bitig" target="_blank" rel="noopener">Kaynak kod</a> · <a href="https://github.com/coden0th/bitig/blob/main/ARCHITECTURE.md" target="_blank" rel="noopener">Mimari</a> · <a href="https://github.com/coden0th/bitig/blob/main/RESULTS.md" target="_blank" rel="noopener">Ölçüm sonuçları</a></span>
+</footer>
+
+<script>
+/* ---------------- Tema ---------------- */
+(function () {
+  const kayitli = localStorage.getItem("bitig-tema");
+  if (kayitli) document.documentElement.setAttribute("data-theme", kayitli);
+  document.getElementById("theme-toggle").onclick = () => {
+    const su = document.documentElement.getAttribute("data-theme");
+    const sistemKoyu = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const suEtkinKoyu = su ? su === "dark" : sistemKoyu;
+    const yeni = suEtkinKoyu ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", yeni);
+    try { localStorage.setItem("bitig-tema", yeni); } catch (e) {}
+  };
+})();
+
+/* ---------------- Yardımcılar ---------------- */
+function el(tag, cls, html) {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (html !== undefined) e.innerHTML = html;
+  return e;
+}
+
+async function cagir(yol, govde) {
+  const r = await fetch(yol, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(govde) });
+  if (!r.ok) {
+    let msg = r.statusText;
+    try { const j = await r.json(); if (j && j.hata) msg = j.hata; } catch (e) {}
+    throw new Error(msg);
+  }
+  return r.json();
+}
+
+function rawBlock(sonuc) {
+  const wrap = el("div");
+  const toggle = el("span", "raw-toggle", '<span class="chev">▸</span> ham JSON');
+  const pre = el("pre", "raw", JSON.stringify(sonuc, null, 2));
+  toggle.onclick = () => { pre.classList.toggle("show"); toggle.classList.toggle("open"); };
+  wrap.appendChild(toggle);
+  wrap.appendChild(pre);
+  return wrap;
+}
+
+function exampleRow(container, values, apply) {
+  if (!values.length) return;
+  const row = el("div", "examples");
+  values.forEach(v => {
+    const chip = el("span", "example-chip", v.length > 34 ? v.slice(0, 33) + "…" : v);
+    chip.title = v;
+    chip.onclick = () => apply(v);
+    row.appendChild(chip);
+  });
+  container.appendChild(row);
+}
+
+function runButton(label) {
+  const btn = el("button", "run");
+  btn.dataset.label = label;
+  btn.innerHTML = label;
+  return btn;
+}
+
+function setLoading(btn, on, loadingLabel) {
+  btn.disabled = on;
+  if (on) {
+    btn.innerHTML = `<span class="spinner"></span> ${loadingLabel || "çalışıyor…"}`;
+  } else {
+    btn.innerHTML = btn.dataset.label;
+  }
+}
+
+function errorBlock(e) {
+  return el("div", "empty", `⚠ Hata: ${e.message || e}`);
+}
+
+/* ---------------- Sekme kabuğu ---------------- */
+const MOTORLAR = [
+  { id: "motor", ad: "Ana Çözümleyici" },
+  { id: "anlatim", ad: "Anlatım Bozukluğu" },
+  { id: "yazim", ad: "Yazım" },
+  { id: "noktalama", ad: "Noktalama" },
+  { id: "atasozu", ad: "Atasözü / Deyim" },
+  { id: "isim_soylu", ad: "İsim Soylu" },
+  { id: "hece", ad: "Hece / Ünlü Uyumu" },
+  { id: "baglam", ad: "Bağlamsal Seçici" },
+];
+
+const tabsEl = document.getElementById("tabs");
+const panelsEl = document.getElementById("panels");
+
+MOTORLAR.forEach((m, i) => {
+  const btn = el("button", "tab-btn" + (i === 0 ? " active" : ""), m.ad);
+  btn.id = "tab-btn-" + m.id;
+  btn.setAttribute("role", "tab");
+  btn.onclick = () => secTab(m.id);
+  tabsEl.appendChild(btn);
+});
+
+function secTab(id) {
+  document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+  document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+  document.getElementById("tab-btn-" + id).classList.add("active");
+  document.getElementById("panel-" + id).classList.add("active");
+  history.replaceState(null, "", "#" + id);
+}
+
+function panelShell(id, baslik, aciklama) {
+  const p = el("div", "panel");
+  p.id = "panel-" + id;
+  const head = el("div", "panel-head");
+  head.appendChild(el("h2", null, baslik));
+  head.appendChild(el("p", null, aciklama));
+  p.appendChild(head);
+  return p;
+}
+
+function bindEnter(inputEl, btn, isTextarea) {
+  inputEl.addEventListener("keydown", (e) => {
+    if (isTextarea) {
+      if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) { e.preventDefault(); btn.click(); }
+    } else {
+      if (e.key === "Enter") { e.preventDefault(); btn.click(); }
+    }
+  });
+}
+
+/* ---------------- Panel: Ana Çözümleyici ---------------- */
+function panelMotor() {
+  const p = panelShell("motor", "Ana Çözümleyici",
+    "Bir cümledeki her kelimeyi kök + ek zincirine ayırır. Birden çok okuma mümkünse hepsi döner; hiçbiri elenmez.");
+  const card = el("div", "field-card");
+  card.appendChild(el("label", "field-label", "Cümle"));
+  const ta = el("textarea"); ta.rows = 3; ta.placeholder = "Örn: Kitabımı kütüphaneye götürdüm.";
+  card.appendChild(ta);
+  exampleRow(card, ["Kitabımı kütüphaneye götürdüm.", "Masada bir kitap var.", "Ufacık bir kedi gördüm.", "Evin çevresi güzeldi."], v => { ta.value = v; ta.focus(); });
+  const foot = el("div", "field-foot");
+  const btn = runButton("Çözümle");
+  foot.appendChild(btn);
+  foot.appendChild(el("span", "kbd-hint", "<kbd>⌘</kbd>+<kbd>Enter</kbd> ile çalıştır"));
+  card.appendChild(foot);
+  p.appendChild(card);
+  const res = el("div", "result");
+  p.appendChild(res);
+  bindEnter(ta, btn, true);
+
+  btn.onclick = async () => {
+    setLoading(btn, true, "çözümleniyor…");
+    try {
+      const sonuc = await cagir("/api/motor", { cumle: ta.value });
+      res.innerHTML = "";
+      const kelimeler = sonuc.kelimeler || [];
+      if (!kelimeler.length) res.appendChild(el("div", "empty", "Sonuç yok — yukarıya bir cümle yazıp Çözümle'ye basın."));
+      kelimeler.forEach(k => {
+        const c = el("div", "card");
+        let baslik = `<span>${k.kelime}</span>`;
+        if (k.belirsiz) baslik += `<span class="badge warn">belirsiz · ${k.okumalar.length} okuma</span>`;
+        if (k.olayda_belirsiz) baslik += `<span class="badge bad">okumalar olayda ayrışıyor</span>`;
+        if (!k.okumalar.length) baslik += `<span class="badge dim">çözülemedi</span>`;
+        c.appendChild(el("h3", null, baslik));
+        if (k.kesin_olaylar && k.kesin_olaylar.length)
+          c.appendChild(el("div", null, `<span class="badge good">kesin: ${k.kesin_olaylar.join(", ")}</span>`));
+        (k.okumalar || []).forEach(ok => {
+          const o = el("div", "okuma");
+          o.appendChild(el("div", "baslik", `${ok.kok} <span style="color:var(--text-faint)">(${ok.tur})</span> → ${ok.turetim_izi[ok.turetim_izi.length - 1] || ok.kok}`));
+          if (ok.ekler.length) o.appendChild(el("div", "ekler", "ekler: " + ok.ekler.join(" + ") + "  ·  " + ok.ek_kimlikleri.join(", ")));
+          (ok.olaylar || []).forEach(olay => {
+            o.appendChild(el("div", "olay", `<b>${olay.olay}</b> — "${olay.kanit.once}" → "${olay.kanit.sonra}", konum ${olay.kanit.konum}, tetikleyen ek: <b>${olay.kanit.tetikleyen_ek}</b>`));
+          });
+          c.appendChild(o);
+        });
+        if (k.osym_gorus) {
+          const og = k.osym_gorus;
+          const box = el("div", "olay");
+          box.style.background = "var(--warn-soft)";
+          box.style.marginTop = "10px";
+          let html = `<b style="color:var(--warn)">⚖ ÖSYM burada farklı düşünüyor</b>`;
+          html += `<div style="margin-top:6px">dilbilim: <span class="mono">${og.dilbilim.join(", ") || "—"}</span> &nbsp;·&nbsp; ÖSYM: <span class="mono">${og.osym.join(", ") || "—"}</span></div>`;
+          og.notlar.forEach(n => {
+            html += `<div style="margin-top:6px">${n.yon === "eklendi" ? "+" : "−"} <b>${n.olay}</b> (${n.coz}) — ${n.gerekce}<br><span style="color:var(--text-faint)">kaynak: ${n.kaynak}</span></div>`;
+          });
+          box.innerHTML = html;
+          c.appendChild(box);
+        }
+        res.appendChild(c);
+      });
+      if (kelimeler.length) res.appendChild(rawBlock(sonuc));
+    } catch (e) { res.innerHTML = ""; res.appendChild(errorBlock(e)); }
+    setLoading(btn, false);
+  };
+  return p;
+}
+
+/* ---------------- Panel: Anlatım Bozukluğu ---------------- */
+function panelAnlatim() {
+  const p = panelShell("anlatim", "Anlatım Bozukluğu",
+    "Beş dar, kelime-listesi tabanlı örüntüyü tarar: çelişen sözcükler, gereksiz eşanlamlı çift, değişmez nitelik tekrarı, gereksiz çoğul, uyumsuz fiilimsi türü.");
+  const card = el("div", "field-card");
+  card.appendChild(el("label", "field-label", "Cümle"));
+  const ta = el("textarea"); ta.rows = 3; ta.placeholder = "Örn: Kuşkusuz sanırım yağmur yağacak.";
+  card.appendChild(ta);
+  exampleRow(card, ["Kuşkusuz sanırım yağmur yağacak.", "Yaklaşık bin kadar kişi geldi.", "Beyaz kar taneleri süzülüyordu."], v => { ta.value = v; ta.focus(); });
+  const foot = el("div", "field-foot");
+  const btn = runButton("Tara");
+  foot.appendChild(btn);
+  card.appendChild(foot);
+  p.appendChild(card);
+  const res = el("div", "result");
+  p.appendChild(res);
+  bindEnter(ta, btn, true);
+
+  btn.onclick = async () => {
+    setLoading(btn, true);
+    try {
+      const sonuc = await cagir("/api/anlatim", { cumle: ta.value });
+      res.innerHTML = "";
+      const bulgular = sonuc.bulgular || [];
+      if (!bulgular.length) res.appendChild(el("div", "empty", "Bulgu yok — bu 5 alt tür bu cümlede yakalanmadı."));
+      bulgular.forEach(b => {
+        const c = el("div", "card");
+        c.appendChild(el("h3", null, `<span class="badge warn">${b.tur}</span>`));
+        c.appendChild(el("div", null, "kanıt: " + b.kanit.join(", ")));
+        res.appendChild(c);
+      });
+      res.appendChild(rawBlock(sonuc));
+    } catch (e) { res.innerHTML = ""; res.appendChild(errorBlock(e)); }
+    setLoading(btn, false);
+  };
+  return p;
+}
+
+/* ---------------- Panel: Yazım ---------------- */
+function panelYazim() {
+  const p = panelShell("yazim", "Yazım Denetimi",
+    "Track A: unutulmuş bir ses kuralından (örn. yumuşama) doğru yazımı türetmeyi dener. Track B: kelimenin TDK önbelleğinde geçerli olup olmadığını (varsa) gösterir.");
+  const card = el("div", "field-card");
+  card.appendChild(el("label", "field-label", "Kelime (tek sözcük)"));
+  const inp = el("input"); inp.type = "text"; inp.placeholder = "Örn: kitapı (yanlış) ya da kitabı (doğru)";
+  card.appendChild(inp);
+  exampleRow(card, ["kitapı", "kitabı", "yanlız"], v => { inp.value = v; inp.focus(); });
+  const foot = el("div", "field-foot");
+  const btn = runButton("Denetle");
+  foot.appendChild(btn);
+  card.appendChild(foot);
+  p.appendChild(card);
+  const res = el("div", "result");
+  p.appendChild(res);
+  bindEnter(inp, btn, false);
+
+  btn.onclick = async () => {
+    setLoading(btn, true);
+    try {
+      const sonuc = await cagir("/api/yazim", { kelime: inp.value });
+      res.innerHTML = "";
+      const c = el("div", "card");
+      c.appendChild(el("h3", null, sonuc.cozulebiliyor_mu
+        ? `<span class="badge good">doğrudan çözülüyor</span>`
+        : `<span class="badge bad">doğrudan çözülemiyor</span>`));
+      if (sonuc.denetim && sonuc.denetim.length) {
+        c.appendChild(el("div", "divider-label", "Track A · morfolojik düzeltme adayları"));
+        sonuc.denetim.forEach(d => {
+          c.appendChild(el("div", "olay", `"${d.aday}" → <b>"${d.duzeltme}"</b> — ${d.kural_id}`));
+        });
+      } else {
+        c.appendChild(el("div", "hint", "Track A: morfolojik düzeltme adayı bulunamadı."));
+      }
+      if (sonuc.tdk) {
+        const rozet = sonuc.tdk.gecerli ? '<span class="badge good">TDK: geçerli</span>' : '<span class="badge bad">TDK: geçersiz</span>';
+        c.appendChild(el("div", "divider-label", "Track B · sözlük"));
+        c.appendChild(el("div", null, rozet + (sonuc.tdk.yonlendirme ? ` — yönlendirme: ${sonuc.tdk.yonlendirme}` : "")));
+      } else {
+        c.appendChild(el("div", "hint", "Track B: kelime TDK önbelleğinde yok (bilinmiyor — geçersiz demek değil)."));
+      }
+      res.appendChild(c);
+      res.appendChild(rawBlock(sonuc));
+    } catch (e) { res.innerHTML = ""; res.appendChild(errorBlock(e)); }
+    setLoading(btn, false);
+  };
+  return p;
+}
+
+/* ---------------- Panel: Noktalama ---------------- */
+function panelNoktalama() {
+  const p = panelShell("noktalama", "Noktalama",
+    "Şart eki sonrası gereksiz virgül ve büyük özel adlarda yanlış iyelik ekiyle kullanılan kesme işareti taranır.");
+  const card = el("div", "field-card");
+  card.appendChild(el("label", "field-label", "Metin"));
+  const ta = el("textarea"); ta.rows = 3; ta.placeholder = "Örn: Hemen kavrayamasak, dile dökemesek de anlıyorduk.";
+  card.appendChild(ta);
+  exampleRow(card, ["Hemen kavrayamasak, dile dökemesek de anlıyorduk.", "Ahmet'e söyledim."], v => { ta.value = v; ta.focus(); });
+  const foot = el("div", "field-foot");
+  const btn = runButton("Tara");
+  foot.appendChild(btn);
+  card.appendChild(foot);
+  p.appendChild(card);
+  const res = el("div", "result");
+  p.appendChild(res);
+  bindEnter(ta, btn, true);
+
+  btn.onclick = async () => {
+    setLoading(btn, true);
+    try {
+      const sonuc = await cagir("/api/noktalama", { metin: ta.value });
+      res.innerHTML = "";
+      const bulgular = sonuc.bulgular || [];
+      if (!bulgular.length) res.appendChild(el("div", "empty", "Bulgu yok."));
+      bulgular.forEach(b => {
+        const c = el("div", "card");
+        c.appendChild(el("h3", null, `<span class="badge warn">${b.tur}</span> <span class="mono">${b.kelime}</span>`));
+        res.appendChild(c);
+      });
+      res.appendChild(rawBlock(sonuc));
+    } catch (e) { res.innerHTML = ""; res.appendChild(errorBlock(e)); }
+    setLoading(btn, false);
+  };
+  return p;
+}
+
+/* ---------------- Panel: Atasözü / Deyim ---------------- */
+function panelAtasozu() {
+  const p = panelShell("atasozu", "Atasözü / Deyim",
+    "13.592 kayıtlık yerel bir sözlükte tam eşleşme ya da alt dize araması yapar. Ağ gerektirmez.");
+  const card = el("div", "field-card");
+  card.appendChild(el("label", "field-label", "Sorgu"));
+  const inp = el("input"); inp.type = "text"; inp.placeholder = "Örn: gözden düşmek";
+  card.appendChild(inp);
+  const radioRow = el("div", "radio-row",
+    `<label><input type="radio" name="mod" value="tam" checked> tam eşleşme</label>
+     <label><input type="radio" name="mod" value="alt_dize"> alt dize (içinde geçen)</label>`);
+  card.appendChild(radioRow);
+  exampleRow(card, ["gözden düşmek", "damlaya damlaya göl olur", "kafa"], v => { inp.value = v; inp.focus(); });
+  const foot = el("div", "field-foot");
+  const btn = runButton("Ara");
+  foot.appendChild(btn);
+  card.appendChild(foot);
+  p.appendChild(card);
+  const res = el("div", "result");
+  p.appendChild(res);
+  bindEnter(inp, btn, false);
+
+  btn.onclick = async () => {
+    setLoading(btn, true);
+    try {
+      const mod = radioRow.querySelector('input[name=mod]:checked').value;
+      const sonuc = await cagir("/api/atasozu", { sorgu: inp.value, mod });
+      res.innerHTML = "";
+      const kayitlar = sonuc.kayitlar || [];
+      if (!kayitlar.length) {
+        res.appendChild(el("div", "empty", "Kayıt bulunamadı."));
+      } else {
+        if (sonuc.toplam > kayitlar.length)
+          res.appendChild(el("div", "hint", `${sonuc.toplam} sonuçtan ilk ${kayitlar.length} gösteriliyor.`));
+        const tbl = el("table", null, `<tr><th>Söz</th><th>Tür</th><th>Anlam</th></tr>`);
+        kayitlar.forEach(k => {
+          tbl.appendChild(el("tr", null, `<td class="mono">${k.soz}</td><td><span class="badge dim">${k.tur}</span></td><td>${k.anlam}</td>`));
+        });
+        res.appendChild(tbl);
+      }
+      res.appendChild(rawBlock(sonuc));
+    } catch (e) { res.innerHTML = ""; res.appendChild(errorBlock(e)); }
+    setLoading(btn, false);
+  };
+  return p;
+}
+
+/* ---------------- Panel: İsim Soylu ---------------- */
+function panelIsimSoylu() {
+  const p = panelShell("isim_soylu", "İsim Soylu Sözcükler",
+    "Zamir/sıfat/zarf/edat/bağlaç gibi kapalı sınıf kelimeleri, cümledeki konumuna bakarak (motor değil, bağlamsal bir sezgi katmanı) sınıflandırır.");
+  const card = el("div", "field-card");
+  card.appendChild(el("label", "field-label", "Cümle"));
+  const ta = el("textarea"); ta.rows = 3; ta.placeholder = "Örn: Bu kitabı ona verdim.";
+  card.appendChild(ta);
+  exampleRow(card, ["Bu kitabı ona verdim.", "O da bizimle geldi.", "Taşlı bir keçi yolundan yürüdük."], v => { ta.value = v; ta.focus(); });
+  const foot = el("div", "field-foot");
+  const btn = runButton("Çözümle");
+  foot.appendChild(btn);
+  card.appendChild(foot);
+  p.appendChild(card);
+  const res = el("div", "result");
+  p.appendChild(res);
+  bindEnter(ta, btn, true);
+
+  btn.onclick = async () => {
+    setLoading(btn, true);
+    try {
+      const sonuc = await cagir("/api/isim_soylu", { cumle: ta.value });
+      res.innerHTML = "";
+      const kelimeler = sonuc.kelimeler || [];
+      if (!kelimeler.length) { res.appendChild(el("div", "empty", "Sonuç yok.")); }
+      else {
+        const tbl = el("table", null, `<tr><th>Kelime</th><th>Tür</th><th>Alt kategori</th><th>Gerekçe</th></tr>`);
+        kelimeler.forEach(s => {
+          tbl.appendChild(s
+            ? el("tr", null, `<td class="mono">${s.kelime}</td><td><span class="badge good">${s.tur}</span></td><td>${s.alt_kategori || "—"}</td><td>${s.gerekce}</td>`)
+            : el("tr", null, `<td colspan="4" class="hint">(bilinçli olarak çözülmedi — ayırt edici bir sezgi yok)</td>`));
+        });
+        res.appendChild(tbl);
+      }
+      res.appendChild(rawBlock(sonuc));
+    } catch (e) { res.innerHTML = ""; res.appendChild(errorBlock(e)); }
+    setLoading(btn, false);
+  };
+  return p;
+}
+
+/* ---------------- Panel: Hece ---------------- */
+function panelHece() {
+  const p = panelShell("hece", "Hece / Ünlü Uyumu",
+    "MEB'in hece bölme kuralı ve büyük/küçük ünlü uyumu — kesme işaretli özel adlar dahil.");
+  const card = el("div", "field-card");
+  card.appendChild(el("div", "warn-box", "<b>⚠ Henüz ölçülmedi.</b> Bu katman gerçek sınav sorularına karşı test edilmedi — kurallar MEB kaynağına dayanıyor ve birim testlerle doğrulanmış, ama bir soru bankası bulunamadığı için doğruluğu bilinmiyor."));
+  card.appendChild(el("label", "field-label", "Cümle"));
+  const ta = el("textarea"); ta.rows = 3; ta.placeholder = "Örn: Türkiye'nin başkenti Ankara'dır, komik bir doktor gördüm.";
+  card.appendChild(ta);
+  exampleRow(card, ["Türkiye'nin başkenti Ankara'dır.", "Söylüyor musun, biliyor musun?"], v => { ta.value = v; ta.focus(); });
+  const foot = el("div", "field-foot");
+  const btn = runButton("Hecele");
+  foot.appendChild(btn);
+  card.appendChild(foot);
+  p.appendChild(card);
+  const res = el("div", "result");
+  p.appendChild(res);
+  bindEnter(ta, btn, true);
+
+  function uyumBadge(etiket, uyum) {
+    if (uyum.uyuyor) return `<span class="badge good">${etiket}: uyuyor</span>`;
+    return `<span class="badge warn">${etiket}: uymuyor (${(uyum.kanit || []).join("→")})</span>`;
+  }
+
+  btn.onclick = async () => {
+    setLoading(btn, true);
+    try {
+      const sonuc = await cagir("/api/hece", { cumle: ta.value });
+      res.innerHTML = "";
+      const kelimeler = sonuc.kelimeler || [];
+      if (!kelimeler.length) res.appendChild(el("div", "empty", "Kelime yok."));
+      kelimeler.forEach(k => {
+        const c = el("div", "card");
+        c.appendChild(el("h3", null, `<span class="mono">${k.kelime}</span> <span style="color:var(--text-faint)">→</span> <span class="mono" style="color:var(--accent)">${k.heceler.join("-")}</span>`));
+        c.appendChild(el("div", null, uyumBadge("büyük ünlü uyumu", k.buyuk_uyum) + " " + uyumBadge("küçük ünlü uyumu", k.kucuk_uyum)));
+        res.appendChild(c);
+      });
+      res.appendChild(rawBlock(sonuc));
+    } catch (e) { res.innerHTML = ""; res.appendChild(errorBlock(e)); }
+    setLoading(btn, false);
+  };
+  return p;
+}
+
+/* ---------------- Panel: Bağlamsal Seçici ---------------- */
+function panelBaglam() {
+  const p = panelShell("baglam", "Bağlamsal Seçici",
+    "Motorun bilerek seçmediği tek şeyi seçen, isteğe bağlı bir kenar katman.");
+
+  const info = el("div", "field-card");
+  info.appendChild(el("div", "divider-label", "Bu katman ne yapar"));
+  info.appendChild(el("p", null,
+    `Motor bir kelimenin <b>tüm</b> geçerli okumalarını döner, hiçbirini elemez —
+    seçim bağlam ister ve bağlam motorun işi değildir. Bağlamsal Seçici, motorun
+    ürettiği bu <b>kapalı</b> okuma kümesinden cümleye en uygun olanı bir dil
+    modeline seçtirir. Üç kısıtı var: <b>yeni bir okuma asla üretmez</b>
+    (yalnızca motorun zaten döndürdüğü kümeden numarayla seçer), <b>motorun
+    kendi çıktısını değiştirmez</b> (ayrı, salt-okunur bir öneri nesnesi
+    üretir), ve çıktısı <b>her zaman sezgisel (heuristic) olarak işaretlenir</b>
+    — kesin bir olay olarak asla sayılmaz, otomatik soru üretiminde dayanak
+    olamaz.`
+  ));
+  info.appendChild(el("div", "divider-label", "Neden public demoda kapalı"));
+  info.appendChild(el("p", null,
+    `Diğer yedi sekmenin aksine bu katman gerçek bir model çağrısı yapar
+    (z.ai / GLM), yani ağa çıkar ve ücretlidir. Herkese açık bir demoda
+    sınırsız, ücretsiz model erişimi sunmak istemedik — bu yüzden
+    <span class="mono">/api/baglam</span> sunucu tarafında kapalı: istek
+    gelirse motora ya da ağa hiç dokunmadan sabit bir ret mesajı döner.`
+  ));
+  info.appendChild(el("div", "divider-label", "Yerelde nasıl çalıştırılır"));
+  const runCard = el("div", "olay");
+  runCard.innerHTML = `<span class="mono">python -m harness.baglam_coz</span><br>
+    <span style="color:var(--text-faint)">API anahtarı: <span class="mono">~/.config/bitigai/zai.key</span></span>`;
+  info.appendChild(runCard);
+  p.appendChild(info);
+
+  const exCard = el("div", "field-card static-example");
+  exCard.style.marginTop = "16px";
+  exCard.appendChild(el("span", "tag-frozen", "Donmuş örnek · canlı çağrı değil"));
+  exCard.appendChild(el("div", "divider-label", "Cümle"));
+  exCard.appendChild(el("p", null, `<span class="mono">"Kitabı okudum ve çok beğendim."</span> — hedef kelime: <span class="mono">Kitabı</span>`));
+  exCard.appendChild(el("div", "divider-label", "Motorun ürettiği kapalı okuma kümesi"));
+  const okumaBox1 = el("div", "okuma");
+  okumaBox1.innerHTML = `<div class="baslik">0 — kitap (Noun) + Belirtme hâli</div>`;
+  const okumaBox2 = el("div", "okuma");
+  okumaBox2.innerHTML = `<div class="baslik">1 — kitap (Noun) + İyelik 3. tekil</div>`;
+  exCard.appendChild(okumaBox1);
+  exCard.appendChild(okumaBox2);
+  exCard.appendChild(el("div", "divider-label", "Seçicinin seçimi"));
+  const secimBox = el("div", "olay");
+  secimBox.innerHTML = `<span class="badge good">seçilen: 0 — kitap (Noun) + Belirtme hâli</span>
+    <div style="margin-top:8px">gerekçe: Cümlede "okudum" geçişli eyleminin belirtili nesnesi
+    olarak kullanıldığı için belirtme hâli eki almıştır.</div>
+    <div class="hint" style="margin-top:6px">kaynak: <span class="mono">Kaynak.SEZGISEL</span> —
+    kesin bir olay değildir, yalnızca bir öneridir.</div>`;
+  exCard.appendChild(secimBox);
+  p.appendChild(exCard);
+
+  return p;
+}
+
+panelsEl.appendChild(panelMotor());
+panelsEl.appendChild(panelAnlatim());
+panelsEl.appendChild(panelYazim());
+panelsEl.appendChild(panelNoktalama());
+panelsEl.appendChild(panelAtasozu());
+panelsEl.appendChild(panelIsimSoylu());
+panelsEl.appendChild(panelHece());
+panelsEl.appendChild(panelBaglam());
+
+const ilkSekme = (location.hash || "").replace("#", "");
+if (ilkSekme && MOTORLAR.some(m => m.id === ilkSekme)) secTab(ilkSekme);
+</script>
+
+</body>
+</html>
